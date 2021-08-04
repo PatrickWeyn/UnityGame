@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Creature : MonoBehaviour
-{
-
+[RequireComponent(typeof(BoxCollider2D))]
+public abstract class Creature : MonoBehaviour {
     public float speedx;
     public float speedy;
+    private RaycastHit2D hit;
+
+    protected virtual void Start() {
+    }
 
     protected virtual void FixedUpdate() {
 
@@ -18,13 +21,25 @@ public abstract class Creature : MonoBehaviour
         Vector3 movedelta = new Vector3(x * speedx, y * speedy, 0);
 
         //Swap sprite direction based on mouse position
-        if ((Input.mousePosition.x- Screen.width / 2) <0) {
+        if ((Input.mousePosition.x - Screen.width / 2) < 0) {
             transform.localScale = new Vector3(-1, 1, 0);
         }
         else {
             transform.localScale = new Vector3(1, 1, 0);
         }
 
+        //Check if something is blocking the way in vertical direction
+        hit = Physics2D.BoxCast(transform.position, gameObject.GetComponent<BoxCollider2D>().size, 0, new Vector2(0, movedelta.y), Mathf.Abs(movedelta.y * Time.deltaTime), LayerMask.GetMask("Blocking", "Actor"));
+        if (hit.collider == null) {
+            transform.Translate(0, movedelta.y * Time.deltaTime, 0);
+        }
+        //Check if something is blocking the way in vertical direction
+        
+        hit = Physics2D.BoxCast(transform.position, gameObject.GetComponent<BoxCollider2D>().size, 0, new Vector2(movedelta.x, 0), Mathf.Abs(movedelta.x * Time.deltaTime), LayerMask.GetMask("Blocking", "Actor"));
+        if (hit.collider == null) {
+            transform.Translate(movedelta.x * Time.deltaTime, 0, 0);
+        }
     }
+
 
 }
