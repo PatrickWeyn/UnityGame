@@ -13,15 +13,16 @@ public class GameManager : MonoBehaviour {
         if (app != null) {
             return;
         }
-
         app = this;
         DontDestroyOnLoad(this);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(cam);
+
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
         SceneManager.LoadScene("Dungeon_Entrance");
     }
 
-    private void OnLevelWasLoaded(int level) {
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
         player.transform.position = position;
     }
 }
