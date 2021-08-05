@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
     public Player player;
     public Camera cam;
     public FTManager ftm;
-    public Vector2 position;
+    public Vector2 pointofentry;
 
     public void Awake() {
         if (app != null) {
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
     }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
-        player.transform.position = position;
+        player.transform.position = pointofentry;
         ftm.transform.position = Vector3.zero;
     }
 }
