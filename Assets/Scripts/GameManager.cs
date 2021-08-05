@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public static GameManager app;
     public Player player;
-    public Camera camera;
+    public Camera cam;
     public Vector2 position;
 
     public void Awake() {
@@ -16,7 +17,8 @@ public class GameManager : MonoBehaviour {
         app = this;
         DontDestroyOnLoad(this);
         DontDestroyOnLoad(player);
-        DontDestroyOnLoad(camera);
+        DontDestroyOnLoad(cam);
+        SceneManager.LoadScene("Dungeon_Entrance");
     }
 
     private void OnLevelWasLoaded(int level) {
