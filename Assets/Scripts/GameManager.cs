@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager app;
     public Player player;
     public Camera camera;
+    public Vector2 position;
 
     public void Awake() {
         if (app != null) {
@@ -16,5 +17,9 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(this);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(camera);
+    }
+
+    private void OnLevelWasLoaded(int level) {
+        player.transform.position = position;
     }
 }
