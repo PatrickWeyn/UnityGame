@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager app;
     public Player player;
     public Camera cam;
+    public FTManager ftm;
     public Vector2 position;
 
     public void Awake() {
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(this);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(cam);
+        DontDestroyOnLoad(ftm);
 
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
         SceneManager.LoadScene("Dungeon_Entrance");
@@ -24,5 +26,6 @@ public class GameManager : MonoBehaviour {
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
         player.transform.position = position;
+        ftm.transform.position = Vector3.zero;
     }
 }
