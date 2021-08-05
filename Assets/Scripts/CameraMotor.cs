@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class CameraMotor : MonoBehaviour
 {
-    public Player player;
 
     public void LateUpdate() {
-        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
+        transform.position = new Vector3(GameManager.app.player.transform.position.x, GameManager.app.player.transform.position.y, -10);
     }
 }
