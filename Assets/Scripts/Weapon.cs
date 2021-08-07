@@ -10,7 +10,8 @@ public class Weapon : MonoBehaviour
     public float cooldown;
     private float lastswing;
 
-    public void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "Fighter") collision.gameObject.SendMessage("ReceiveDamage", new Damage(Random.Range(mindam, maxdam), pushback, this.transform.parent.gameObject));
+    public void OnCollisionStay2D(Collision2D collision) {
+        if (collision.collider.tag == "Fighter")
+            collision.gameObject.SendMessage("ReceiveDamage", new Damage(Random.Range(mindam, maxdam), pushback, this.transform.parent.gameObject));
     }
 }
