@@ -8,8 +8,8 @@ public class FTManager : MonoBehaviour {
     public GameObject ftprefab;
 
     private FloatingText GetFloatingText() {
-        FloatingText ft = floatingtexts.Find(t => t.go.activeSelf);
-
+        FloatingText ft = floatingtexts.Find(t => !t.go.activeSelf);
+        
         if (ft == null) {
             ft = new FloatingText();
             ft.go = Instantiate(ftprefab);
