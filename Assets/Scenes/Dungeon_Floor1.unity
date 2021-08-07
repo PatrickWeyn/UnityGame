@@ -9137,7 +9137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b76b398f8b8dd4baefed00f3f60069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  landingpos: {x: 0, y: 1.2}
+  landingpos: {x: 0, y: 1.1}
   sceneName: Dungeon_Entrance
 --- !u!61 &1543022604
 BoxCollider2D:
