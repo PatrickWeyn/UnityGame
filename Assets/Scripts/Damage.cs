@@ -6,9 +6,11 @@ public class Damage : MonoBehaviour
 {
     public int damage;
     public float pushback;
+    public GameObject source;
 
-    public Damage(int dmg, float pushback) {
+    public Damage(int dmg, float pushback, GameObject src) {
         damage = dmg;
         this.pushback = pushback;
+        source = src;
     }
 }

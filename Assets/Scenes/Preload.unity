@@ -557,8 +557,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedx: 1
   speedy: 1
-  health: 0
-  xp: 0
+  health: 50
+  experience: 0
 --- !u!4 &4937249963537263386
 Transform:
   m_ObjectHideFlags: 0

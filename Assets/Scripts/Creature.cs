@@ -11,8 +11,9 @@ public abstract class Creature : MonoBehaviour {
 
     private RaycastHit2D hit;
 
-    protected virtual void ReceiveDamage(Damage dmg) {
+    protected void ReceiveDamage(Damage dmg) {
         health -= dmg.damage;
+        if (health <= 0) Death(dmg);
         GameManager.app.ftm.ShowMessage("-" + dmg.damage.ToString(), "dmg", transform.position);
     }
 
@@ -36,5 +37,9 @@ public abstract class Creature : MonoBehaviour {
     }
 
     protected abstract void ChangeSpriteDirection(Vector3 dir);
+
+    protected virtual void Death(Damage dmg) {
+        Destroy(this.gameObject);
+    }
 
 }
