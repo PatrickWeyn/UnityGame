@@ -16,7 +16,6 @@ public class Enemy : NPC {
                     status = 1;
                     startpos = transform.position;
                     GameManager.app.ftm.ShowMessage("Sqwuuueeeek!", "dmg", transform.position);
-                    Debug.Log("Changing status : 1");
                 }
                 break;
             // Chasing
@@ -26,22 +25,19 @@ public class Enemy : NPC {
                 }
                 else {
                     status = 2;
-                    Debug.Log("Changing status : 2");
                 }
                 break;
             // Returning
             case 2:
                 if (Vector3.Distance(GameManager.app.player.transform.position, startpos) > chaserange) {
-                    MoveCreature((startpos - transform.position) * 0.75f);
+                    MoveCreature((startpos - transform.position).normalized);
                     if (Vector3.Distance(transform.position, startpos) < 0.01) {
                         status = 0;
-                        Debug.Log("Changing status : 0");
                     }
                 }
                 else {
                     status = 1;
                 }
-                Debug.Log(Vector3.Distance(transform.position, startpos));
                 break;
         }
     }

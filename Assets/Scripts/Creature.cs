@@ -8,12 +8,18 @@ public abstract class Creature : MonoBehaviour {
     public float speedy;
 
     public int health;
+    public int maxhealth;
+    public float pushrecovery;
 
+
+    private Vector3 pushdirection;
     private RaycastHit2D hit;
 
     protected virtual void ReceiveDamage(Damage dmg) {
         health -= dmg.damage;
+        pushdirection = (transform.position - dmg.source.transform.position).normalized * dmg.pushback;
         GameManager.app.ftm.ShowMessage("-" + dmg.damage.ToString(), "dmg", transform.position);
+        if (health <= 0) Death(dmg);
     }
 
     protected void MoveCreature(Vector3 input) {
@@ -21,6 +27,10 @@ public abstract class Creature : MonoBehaviour {
         Vector3 movedelta = new Vector3(input.x * speedx, input.y * speedy, 0);
 
         ChangeSpriteDirection(movedelta);
+
+        //Add push vector, if any
+        movedelta += pushdirection;
+        pushdirection = Vector3.Lerp(pushdirection, Vector3.zero, pushrecovery);
 
         //Check if something is blocking the way in vertical direction
         hit = Physics2D.BoxCast(transform.position, gameObject.GetComponent<BoxCollider2D>().size, 0, new Vector2(0, movedelta.y), Mathf.Abs(movedelta.y * Time.deltaTime), LayerMask.GetMask("Blocking", "Actor"));
@@ -36,5 +46,9 @@ public abstract class Creature : MonoBehaviour {
     }
 
     protected abstract void ChangeSpriteDirection(Vector3 dir);
+
+    protected virtual void Death(Damage dmg) {
+        Destroy(this.gameObject);
+    }
 
 }
