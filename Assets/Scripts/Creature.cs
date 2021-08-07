@@ -20,13 +20,7 @@ public abstract class Creature : MonoBehaviour {
         //Determine the difference between our current position and the new position
         Vector3 movedelta = new Vector3(x * speedx, y * speedy, 0);
 
-        //Swap sprite direction based on mouse position
-        if ((Input.mousePosition.x - Screen.width / 2) < 0) {
-            transform.localScale = new Vector3(-1, 1, 0);
-        }
-        else {
-            transform.localScale = new Vector3(1, 1, 0);
-        }
+        ChangeSpriteDirection(movedelta);
 
         //Check if something is blocking the way in vertical direction
         hit = Physics2D.BoxCast(transform.position, gameObject.GetComponent<BoxCollider2D>().size, 0, new Vector2(0, movedelta.y), Mathf.Abs(movedelta.y * Time.deltaTime), LayerMask.GetMask("Blocking", "Actor"));
@@ -41,5 +35,6 @@ public abstract class Creature : MonoBehaviour {
         }
     }
 
+    protected abstract void ChangeSpriteDirection(Vector3 dir);
 
 }
