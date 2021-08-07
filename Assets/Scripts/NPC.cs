@@ -15,6 +15,5 @@ public class NPC : Creature {
         base.Death(dmg);
         if (dmg.source.name == GameManager.app.player.name) GameManager.app.player.experience += xp;
         GameManager.app.ftm.ShowMessage("+" + xp + " XP", "xp", transform.position);
-
     }
 }
