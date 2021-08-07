@@ -50,3 +50,6 @@ TagManager:
   - name: Actor
     uniqueID: 2056448005
     locked: 0
+  - name: FloatingText
+    uniqueID: 2053648647
+    locked: 0

@@ -10,7 +10,7 @@ public class SceneTransition : Transition
     protected override void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.name == "Player") {
             SceneManager.LoadScene(sceneName);
-            GameManager.app.position = this.landingpos;
+            GameManager.app.pointofentry = this.landingpos;
         }
     }
 }
