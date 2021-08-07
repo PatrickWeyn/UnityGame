@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public Player player;
     public Camera cam;
     public FTManager ftm;
+    public Weapon weapon;
     public Vector2 pointofentry;
 
     public void Awake() {
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(cam);
         DontDestroyOnLoad(ftm);
+        DontDestroyOnLoad(weapon);
 
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
         SceneManager.LoadScene("Dungeon_Entrance");

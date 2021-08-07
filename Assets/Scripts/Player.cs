@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : Creature
-{
-    protected override void Start() {
+public class Player : Creature {
+
+    private void Start() {
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
     }
@@ -18,5 +18,13 @@ public class Player : Creature
         else {
             transform.localScale = new Vector3(1, 1, 0);
         }
+    }
+
+    private void FixedUpdate() {
+        //Capture Input
+        float x = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
+
+        this.MoveCreature(new Vector3(x, y, 0));
     }
 }
