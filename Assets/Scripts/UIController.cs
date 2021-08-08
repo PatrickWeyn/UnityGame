@@ -43,4 +43,10 @@ public class UIController : MonoBehaviour
             }
         }
     }
+
+    public void UpdateStats() {
+        GameObject statspanel = transform.Find("Container").Find("CharacterStats").gameObject;
+        statspanel.transform.Find("HP").GetComponent<Text>().text = GameManager.app.player.maxhealth.ToString();
+        statspanel.transform.Find("XP").GetComponent<Text>().text = GameManager.app.player.GetExperience().ToString();
+    }
 }

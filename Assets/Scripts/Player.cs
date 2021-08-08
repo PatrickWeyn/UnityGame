@@ -5,12 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : Creature {
 
-    public int experience;
+    private int experience;
     public int unusedabilitypoints;
 
     private void Start() {
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
+        experience = 0;
         STR = 1;
         DEX = 1;
         CON = 1;
@@ -19,6 +20,16 @@ public class Player : Creature {
         CHA = 1;
         unusedabilitypoints = 5;
         GameManager.app.UI.SendMessage("UpdateAbilityScores");
+        GameManager.app.UI.SendMessage("UpdateStats");
+    }
+
+    public void SetExperience(int xp) {
+        experience += xp;
+        GameManager.app.UI.SendMessage("UpdateStats");
+    }
+
+    public int GetExperience() {
+        return experience;
     }
 
     protected override void ChangeSpriteDirection(Vector3 dir) {

@@ -13,7 +13,7 @@ public class NPC : Creature {
 
     protected override void Death(Damage dmg) {
         base.Death(dmg);
-        if (dmg.source.name == GameManager.app.player.name) GameManager.app.player.experience += xp;
+        if (dmg.source.name == GameManager.app.player.name) GameManager.app.player.SetExperience(xp);
         GameManager.app.ftm.ShowMessage("+" + xp + " XP", "xp", transform.position);
     }
 }
