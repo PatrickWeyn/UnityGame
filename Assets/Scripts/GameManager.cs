@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour {
     public GameObject Char_Stat2;
     public Player player;
     public Weapon weapon;
+    public EventSystem eventsys;
 
 
     public void Awake() {
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(Char_Stat2);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(weapon);
+        DontDestroyOnLoad(eventsys);
 
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
         SceneManager.LoadScene("Dungeon_Entrance");

@@ -5,15 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : Creature {
 
-    //Player Statistics
-    private int STR;
-    private int DEX;
-    private int CON;
-    private int INT;
-    private int WIS;
-    private int CHA;
-
     public int experience;
+    public int unusedabilitypoints;
 
     private void Start() {
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -24,6 +17,8 @@ public class Player : Creature {
         INT = 1;
         WIS = 1;
         CHA = 1;
+        unusedabilitypoints = 5;
+        GameManager.app.UI.SendMessage("UpdateAbilityScores");
     }
 
     protected override void ChangeSpriteDirection(Vector3 dir) {
@@ -43,4 +38,20 @@ public class Player : Creature {
 
         this.MoveCreature(new Vector3(x, y, 0));
     }
+
+    public void AddScore(string ability) {
+        if (unusedabilitypoints > 0) {
+            unusedabilitypoints -= 1;
+            switch (ability) {
+                case "STR": STR += 1; break;
+                case "DEX": DEX += 1; break;
+                case "CON": CON += 1; break;
+                case "INT": INT += 1; break;
+                case "WIS": WIS += 1; break;
+                case "CHA": CHA += 1; break;
+            }
+            GameManager.app.UI.SendMessage("UpdateAbilityScores");
+        }
+    }
+
 }

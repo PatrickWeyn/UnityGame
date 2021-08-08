@@ -28,7 +28,19 @@ public class UIController : MonoBehaviour
         weaponpanel.transform.Find("WeaponImage").GetComponent<Image>().sprite = weapon.weapon.art;
     }
 
-    public void UpdateStats() {
-
+    public void UpdateAbilityScores() {
+        GameObject abilityscorepanel = transform.Find("Container").Find("CharacterAbilityScores").gameObject;
+        abilityscorepanel.transform.Find("STR").GetComponent<Text>().text = GameManager.app.player.STR.ToString();
+        abilityscorepanel.transform.Find("DEX").GetComponent<Text>().text = GameManager.app.player.DEX.ToString();
+        abilityscorepanel.transform.Find("CON").GetComponent<Text>().text = GameManager.app.player.CON.ToString();
+        abilityscorepanel.transform.Find("INT").GetComponent<Text>().text = GameManager.app.player.INT.ToString();
+        abilityscorepanel.transform.Find("WIS").GetComponent<Text>().text = GameManager.app.player.WIS.ToString();
+        abilityscorepanel.transform.Find("CHA").GetComponent<Text>().text = GameManager.app.player.CHA.ToString();
+        abilityscorepanel.transform.Find("Explanation").GetComponent<Text>().text = "Unused Skill Points: " + GameManager.app.player.unusedabilitypoints.ToString();
+        if (GameManager.app.player.unusedabilitypoints == 0) {
+            foreach (Button b in FindObjectsOfType<Button>()) {
+                b.gameObject.SetActive(false);
+            }
+        }
     }
 }
