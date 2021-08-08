@@ -5,13 +5,31 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : Creature {
 
-    public int experience;
-    private float immuneperiod= 2.0f;
-    private float lasthitreceived;
+    private int experience;
+    public int unusedabilitypoints;
 
     private void Start() {
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
+        experience = 0;
+        STR = 1;
+        DEX = 1;
+        CON = 1;
+        INT = 1;
+        WIS = 1;
+        CHA = 1;
+        unusedabilitypoints = 5;
+        GameManager.app.UI.SendMessage("UpdateAbilityScores");
+        GameManager.app.UI.SendMessage("UpdateStats");
+    }
+
+    public void SetExperience(int xp) {
+        experience += xp;
+        GameManager.app.UI.SendMessage("UpdateStats");
+    }
+
+    public int GetExperience() {
+        return experience;
     }
 
     protected override void ChangeSpriteDirection(Vector3 dir) {
@@ -32,10 +50,19 @@ public class Player : Creature {
         this.MoveCreature(new Vector3(x, y, 0));
     }
 
-    protected override void ReceiveDamage(Damage dmg) {
-        if (Time.time - lasthitreceived > immuneperiod) {
-            lasthitreceived = Time.time;
-            base.ReceiveDamage(dmg);
+    public void AddScore(string ability) {
+        if (unusedabilitypoints > 0) {
+            unusedabilitypoints -= 1;
+            switch (ability) {
+                case "STR": STR += 1; break;
+                case "DEX": DEX += 1; break;
+                case "CON": CON += 1; break;
+                case "INT": INT += 1; break;
+                case "WIS": WIS += 1; break;
+                case "CHA": CHA += 1; break;
+            }
+            GameManager.app.UI.SendMessage("UpdateAbilityScores");
         }
     }
+
 }

@@ -1,15 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public static GameManager app;
-    public Player player;
     public Camera cam;
     public FTManager ftm;
-    public Weapon weapon;
     public Vector2 pointofentry;
+    public Canvas UI;
+    public GameObject BackgroundExit;
+    public GameObject UIContainer;
+    public GameObject Char_Stat;
+    public GameObject Char_Equip;
+    public GameObject Char_Stat2;
+    public Player player;
+    public Weapon weapon;
+    public EventSystem eventsys;
+
 
     public void Awake() {
         if (app != null) {
@@ -17,10 +26,17 @@ public class GameManager : MonoBehaviour {
         }
         app = this;
         DontDestroyOnLoad(this);
-        DontDestroyOnLoad(player);
         DontDestroyOnLoad(cam);
         DontDestroyOnLoad(ftm);
+        DontDestroyOnLoad(UI);
+        DontDestroyOnLoad(BackgroundExit);
+        DontDestroyOnLoad(UIContainer);
+        DontDestroyOnLoad(Char_Stat);
+        DontDestroyOnLoad(Char_Equip);
+        DontDestroyOnLoad(Char_Stat2);
+        DontDestroyOnLoad(player);
         DontDestroyOnLoad(weapon);
+        DontDestroyOnLoad(eventsys);
 
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
         SceneManager.LoadScene("Dungeon_Entrance");

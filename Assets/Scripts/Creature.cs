@@ -7,6 +7,14 @@ public abstract class Creature : MonoBehaviour {
     public float speedx;
     public float speedy;
 
+    //Ability Scores
+    public int STR;
+    public int DEX;
+    public int CON;
+    public int INT;
+    public int WIS;
+    public int CHA;
+
     public int health;
     public int maxhealth;
     public float pushrecovery;
