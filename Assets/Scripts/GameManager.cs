@@ -10,6 +10,13 @@ public class GameManager : MonoBehaviour {
     public FTManager ftm;
     public Weapon weapon;
     public Vector2 pointofentry;
+    public Canvas UI;
+    public GameObject BackgroundExit;
+    public GameObject UIContainer;
+    public GameObject Char_Stat;
+    public GameObject Char_Equip;
+    public GameObject Char_Stat2;
+
 
     public void Awake() {
         if (app != null) {
@@ -21,6 +28,12 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(cam);
         DontDestroyOnLoad(ftm);
         DontDestroyOnLoad(weapon);
+        DontDestroyOnLoad(UI);
+        DontDestroyOnLoad(BackgroundExit);
+        DontDestroyOnLoad(UIContainer);
+        DontDestroyOnLoad(Char_Stat);
+        DontDestroyOnLoad(Char_Equip);
+        DontDestroyOnLoad(Char_Stat2);
 
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
         SceneManager.LoadScene("Dungeon_Entrance");
