@@ -18639,10 +18639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a5833155e12b14ba3e3be5701e4b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mindam: 1
-  maxdam: 1
-  pushback: 5
-  cooldown: 0.5
+  weapon: {fileID: 11400000, guid: 3766d5d186ff56b42aba8ff770705e5f, type: 2}
 --- !u!1 &1508028777
 GameObject:
   m_ObjectHideFlags: 0
