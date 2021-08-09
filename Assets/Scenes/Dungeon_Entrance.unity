@@ -24894,7 +24894,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1975811816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 830b6dd11eee32c4e83498472893a30a, type: 3}
+  m_Script: {fileID: 11500000, guid: 772bbb0e9dd05a7429cd3ba77993a7f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speedx: 0
@@ -24905,8 +24905,8 @@ MonoBehaviour:
   INT: 0
   WIS: 0
   CHA: 0
-  health: 0
-  maxhealth: 0
+  health: 5
+  maxhealth: 5
   pushrecovery: 0
   xp: 0
 --- !u!61 &1975811818
