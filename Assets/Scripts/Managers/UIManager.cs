@@ -37,6 +37,31 @@ public class UIManager : MonoBehaviour {
         statspanel.transform.Find("XP").GetComponent<Text>().text = GameManager.app.player.GetExperience().ToString();
     }
 
+    public void UpdateDialogue(Dialog dialog) {
+        GameObject dialoguepanel = transform.Find("DialogueBox").gameObject;
+        dialoguepanel.transform.Find("IMG_NPCArt").GetComponent<Image>().sprite = dialog.Character;
+        dialoguepanel.transform.Find("LBL_NPCName").GetComponent<Text>().text = dialog.Firstname + " " + dialog.Lastname;
+        dialoguepanel.transform.Find("LBL_NPCText").GetComponent<Text>().text = dialog.Response;
+        //Create new gameobject for an option
+        GameObject txtobj = new GameObject();
+        txtobj.transform.SetParent(dialoguepanel.transform.Find("PAN_Responses").gameObject.transform);
+        //Add RectTransform
+        RectTransform rct = txtobj.AddComponent<RectTransform>();
+        rct.anchorMin = new Vector2(0, 1);
+        rct.anchorMax = new Vector2(0, 1);
+        rct.pivot = new Vector2(0, 1);
+        rct.anchoredPosition = Vector2.zero;
+        rct.sizeDelta = new Vector2(1515, 50);
+        rct.localScale = Vector3.one;
+        //Add Text
+        Text txt = txtobj.AddComponent<Text>();
+        txt.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+        txt.fontSize = 28;
+        txt.alignment = TextAnchor.MiddleCenter;
+        txt.color = Color.white;
+        txt.text = dialog.Option;
+    }
+
     public void HandleMenu(KeyCode code) {
         switch (code) {
             case KeyCode.F:

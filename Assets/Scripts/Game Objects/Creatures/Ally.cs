@@ -7,18 +7,12 @@ public class Ally : NPC {
     private static float DETECTIONRANGE = 0.32f;
 
     //Test Data (delete in method Start())
-    private string firstname;
-    private string lastname;
-    private string response;
-    private string option;
+    public Dialog dialog;
 
     private bool playerinrange;
 
     private void Start() {
-        firstname = "Brent";
-        lastname = "Halligan";
-        response = "Hail traveler, what seems to be the issue?";
-        option = "Nothing";
+        dialog = new Dialog(this.GetComponent<SpriteRenderer>().sprite, "Brent", "Halligan", "Hail traveler, what seems to be the issue?", "Nothing");
     }
 
     private void Update() {
@@ -28,6 +22,7 @@ public class Ally : NPC {
                 Debug.Log("Player entered within range of " + name + "! Press F to interact!");
             }
             if (Input.GetKeyDown(KeyCode.F)) {
+                GameManager.app.UI.SendMessage("UpdateDialogue", dialog);
                 GameManager.app.UI.SendMessage("HandleMenu", KeyCode.F);
             }
 
