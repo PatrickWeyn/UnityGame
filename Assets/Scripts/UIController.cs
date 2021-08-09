@@ -19,7 +19,7 @@ public class UIController : MonoBehaviour
     }
 
     public void UpdateWeapon() {
-        GameObject weaponpanel = transform.Find("Container").Find("CharacterWeapon").gameObject;
+        GameObject weaponpanel = transform.Find("CharacterScreen").Find("CharacterWeapon").gameObject;
         Weapon weapon = GameManager.app.player.transform.Find("Weapon").GetComponent<Weapon>();
         weaponpanel.transform.Find("MinDmg").GetComponent<Text>().text = weapon.weapon.mindmg.ToString();
         weaponpanel.transform.Find("MaxDmg").GetComponent<Text>().text = (weapon.weapon.maxdmg-1).ToString();
@@ -29,7 +29,7 @@ public class UIController : MonoBehaviour
     }
 
     public void UpdateAbilityScores() {
-        GameObject abilityscorepanel = transform.Find("Container").Find("CharacterAbilityScores").gameObject;
+        GameObject abilityscorepanel = transform.Find("CharacterScreen").Find("CharacterAbilityScores").gameObject;
         abilityscorepanel.transform.Find("STR").GetComponent<Text>().text = GameManager.app.player.STR.ToString();
         abilityscorepanel.transform.Find("DEX").GetComponent<Text>().text = GameManager.app.player.DEX.ToString();
         abilityscorepanel.transform.Find("CON").GetComponent<Text>().text = GameManager.app.player.CON.ToString();
@@ -45,7 +45,7 @@ public class UIController : MonoBehaviour
     }
 
     public void UpdateStats() {
-        GameObject statspanel = transform.Find("Container").Find("CharacterStats").gameObject;
+        GameObject statspanel = transform.Find("CharacterScreen").Find("CharacterStats").gameObject;
         statspanel.transform.Find("HP").GetComponent<Text>().text = GameManager.app.player.maxhealth.ToString();
         statspanel.transform.Find("XP").GetComponent<Text>().text = GameManager.app.player.GetExperience().ToString();
     }
