@@ -10,10 +10,6 @@ public class GameManager : MonoBehaviour {
     public FTManager ftm;
     public Vector2 pointofentry;
     public Canvas UI;
-    public GameObject UIContainer;
-    public GameObject Char_Stat;
-    public GameObject Char_Equip;
-    public GameObject Char_Stat2;
     public Player player;
     public Weapon weapon;
     public EventSystem eventsys;
@@ -28,16 +24,18 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(cam);
         DontDestroyOnLoad(ftm);
         DontDestroyOnLoad(UI);
-        DontDestroyOnLoad(UIContainer);
-        DontDestroyOnLoad(Char_Stat);
-        DontDestroyOnLoad(Char_Equip);
-        DontDestroyOnLoad(Char_Stat2);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(weapon);
         DontDestroyOnLoad(eventsys);
 
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
         SceneManager.LoadScene("Dungeon_Entrance");
+    }
+
+    public void Update() {
+        if (Input.GetKeyDown(KeyCode.B)) {
+            UI.SendMessage("HandleMenu", KeyCode.B);
+        }
     }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {

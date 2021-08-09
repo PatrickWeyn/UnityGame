@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ally : NPC
-{
+public class Ally : NPC {
     //Constants
     private static float DETECTIONRANGE = 0.32f;
 
@@ -26,14 +25,13 @@ public class Ally : NPC
         if (DETECTIONRANGE > Vector3.Distance(transform.position, GameManager.app.player.transform.position)) {
             if (!playerinrange) {
                 playerinrange = true;
+                Debug.Log("Player entered within range of " + name + "! Press F to interact!");
             }
-            Debug.Log("Press F to interact. (NOT IMPLEMENTED)");
+            if (Input.GetKeyDown(KeyCode.F)) {
+                GameManager.app.UI.SendMessage("HandleMenu", KeyCode.F);
+            }
 
         }
-        else {
-            if (playerinrange) {
-                playerinrange = false;
-            }
-        }
+        else playerinrange = false;
     }
 }
