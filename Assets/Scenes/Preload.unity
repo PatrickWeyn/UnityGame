@@ -778,7 +778,7 @@ GameObject:
   - component: {fileID: 786001099}
   - component: {fileID: 786001098}
   m_Layer: 5
-  m_Name: BackgroundExit
+  m_Name: BackgroundFade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
