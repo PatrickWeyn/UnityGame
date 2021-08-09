@@ -65,4 +65,7 @@ public class Player : Creature {
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision) {
+    }
+
 }

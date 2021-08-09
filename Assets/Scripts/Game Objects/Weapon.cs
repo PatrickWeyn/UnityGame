@@ -14,8 +14,8 @@ public class Weapon : MonoBehaviour
         GameManager.app.UI.SendMessage("UpdateWeapon");
     }
 
-    public void OnTriggerStay2D(Collider2D collision) { 
-        if (collision.gameObject.tag == "Fighter")
+    public void OnTriggerStay2D(Collider2D collision) {
+        if (collision.gameObject.tag == "Fighter" && collision.GetType() == typeof(BoxCollider2D))
             collision.gameObject.SendMessage("ReceiveDamage", new Damage(Random.Range(weapon.mindmg, weapon.maxdmg), weapon.pushback, this.transform.parent.gameObject));
     }
 

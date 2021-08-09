@@ -24897,8 +24897,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 772bbb0e9dd05a7429cd3ba77993a7f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedx: 0
-  speedy: 0
+  speedx: 1
+  speedy: 1
   STR: 0
   DEX: 0
   CON: 0
@@ -24907,8 +24907,8 @@ MonoBehaviour:
   CHA: 0
   health: 5
   maxhealth: 5
-  pushrecovery: 0
-  xp: 0
+  pushrecovery: 1
+  xp: 1
 --- !u!61 &1975811818
 BoxCollider2D:
   m_ObjectHideFlags: 0
