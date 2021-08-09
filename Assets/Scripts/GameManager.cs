@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour {
     public FTManager ftm;
     public Vector2 pointofentry;
     public Canvas UI;
-    public GameObject BackgroundExit;
     public GameObject UIContainer;
     public GameObject Char_Stat;
     public GameObject Char_Equip;
@@ -29,7 +28,6 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(cam);
         DontDestroyOnLoad(ftm);
         DontDestroyOnLoad(UI);
-        DontDestroyOnLoad(BackgroundExit);
         DontDestroyOnLoad(UIContainer);
         DontDestroyOnLoad(Char_Stat);
         DontDestroyOnLoad(Char_Equip);
