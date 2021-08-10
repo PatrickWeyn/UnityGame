@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dialog : MonoBehaviour
+public class Dialog
 {
     private Sprite character;
     private string firstname;

@@ -62,18 +62,12 @@ public class UIManager : MonoBehaviour {
         txt.text = dialog.Option;
     }
 
-    public void HandleMenu(KeyCode code) {
-        switch (code) {
-            case KeyCode.F:
-                if (!transform.Find("DialogueBox").gameObject.activeSelf)
-                    transform.Find("DialogueBox").gameObject.SetActive(true);
-                else transform.Find("DialogueBox").gameObject.SetActive(false);
-                break;
-            case KeyCode.B:
-                if (!transform.Find("CharacterScreen").gameObject.activeSelf)
-                    transform.Find("CharacterScreen").gameObject.SetActive(true);
-                else transform.Find("CharacterScreen").gameObject.SetActive(false);
-                break;
-        }
+    public void ShowDialogMenu(Dialog dialog) {
+        UpdateDialogue(dialog);
+        transform.Find("DialogueBox").gameObject.SetActive(true);
+    }
+
+    public void HideDialogMenu() {
+        transform.Find("DialogueBox").gameObject.SetActive(false);
     }
 }

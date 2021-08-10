@@ -7,7 +7,7 @@ public class Ally : NPC {
     private static float DETECTIONRANGE = 0.32f;
 
     //Test Data (delete in method Start())
-    public Dialog dialog;
+    private Dialog dialog;
 
     private bool playerinrange;
 
@@ -19,14 +19,15 @@ public class Ally : NPC {
         if (DETECTIONRANGE > Vector3.Distance(transform.position, GameManager.app.player.transform.position)) {
             if (!playerinrange) {
                 playerinrange = true;
-                Debug.Log("Player entered within range of " + name + "! Press F to interact!");
+                GameManager.app.TrackNearbyNPC(this);
             }
-            if (Input.GetKeyDown(KeyCode.F)) {
-                GameManager.app.UI.SendMessage("UpdateDialogue", dialog);
-                GameManager.app.UI.SendMessage("HandleMenu", KeyCode.F);
-            }
-
+        } else if (playerinrange) {
+            playerinrange = false;
+            GameManager.app.UntrackNearbyNPC(this);
         }
-        else playerinrange = false;
     }
+
+
+    //Variable Getters and Setters
+    public Dialog Dialog { get => dialog; set => dialog = value; }
 }

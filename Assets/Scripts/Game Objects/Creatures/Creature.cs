@@ -42,13 +42,13 @@ public abstract class Creature : MonoBehaviour {
 
         //Check if something is blocking the way in vertical direction
         hit = Physics2D.BoxCast(transform.position, gameObject.GetComponent<BoxCollider2D>().size, 0, new Vector2(0, movedelta.y), Mathf.Abs(movedelta.y * Time.deltaTime), LayerMask.GetMask("Blocking", "Actor"));
-        if (hit.collider == null) {
+        if (hit.collider == null || hit.collider.GetType() == typeof(CircleCollider2D)) {
             transform.Translate(0, movedelta.y * Time.deltaTime, 0);
         }
         //Check if something is blocking the way in vertical direction
 
         hit = Physics2D.BoxCast(transform.position, gameObject.GetComponent<BoxCollider2D>().size, 0, new Vector2(movedelta.x, 0), Mathf.Abs(movedelta.x * Time.deltaTime), LayerMask.GetMask("Blocking", "Actor"));
-        if (hit.collider == null) {
+        if (hit.collider == null || hit.collider.GetType() == typeof(CircleCollider2D)) {
             transform.Translate(movedelta.x * Time.deltaTime, 0, 0);
         }
     }

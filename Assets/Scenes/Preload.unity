@@ -123,6 +123,49 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &74470659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 74470661}
+  - component: {fileID: 74470660}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &74470660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74470659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d8071e8a0fc1944b79767d9595ec51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &74470661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74470659}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0062500015, y: 0.09475, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &207257977
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,10 +330,11 @@ MonoBehaviour:
   cam: {fileID: 4937249963537263589}
   ftm: {fileID: 1846702102}
   pointofentry: {x: 0, y: 0}
-  UI: {fileID: 1897843152}
+  UI: {fileID: 1897843155}
   player: {fileID: 2959147499013075599}
   weapon: {fileID: 1031560565}
   eventsys: {fileID: 657590625}
+  im: {fileID: 74470660}
 --- !u!4 &231131396
 Transform:
   m_ObjectHideFlags: 0
@@ -4458,6 +4502,7 @@ GameObject:
   - component: {fileID: 2959147499013075599}
   - component: {fileID: 2959147499013075598}
   - component: {fileID: 2959147499013075593}
+  - component: {fileID: 2959147499013075587}
   m_Layer: 7
   m_Name: Player
   m_TagString: Fighter
@@ -4465,6 +4510,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!58 &2959147499013075587
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2959147499013075586}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.020001113, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.23111945
 --- !u!50 &2959147499013075593
 Rigidbody2D:
   serializedVersion: 4

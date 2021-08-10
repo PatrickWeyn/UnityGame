@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : Creature {
+
+    //Detection Aura
 
     private int experience;
     public int unusedabilitypoints;
@@ -63,9 +66,6 @@ public class Player : Creature {
             }
             GameManager.app.UI.SendMessage("UpdateAbilityScores");
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision) {
     }
 
 }
