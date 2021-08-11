@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,6 +58,18 @@ public abstract class Creature : MonoBehaviour {
 
     protected virtual void Death(Damage dmg) {
         Destroy(this.gameObject);
+    }
+
+    public int GetScore(string ability) {
+        return ability switch {
+            "STR" => STR,
+            "DEX" => DEX,
+            "CON" => CON,
+            "INT" => INT,
+            "WIS" => WIS,
+            "CHA" => CHA,
+            _ => throw new Exception("Creature.GetScore() received incorrect string \"" + ability + "\""),
+        };
     }
 
 }

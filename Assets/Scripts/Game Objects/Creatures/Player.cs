@@ -67,5 +67,4 @@ public class Player : Creature {
             GameManager.app.UI.SendMessage("UpdateAbilityScores");
         }
     }
-
 }

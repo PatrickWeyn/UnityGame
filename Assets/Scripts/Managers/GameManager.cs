@@ -77,6 +77,10 @@ public class GameManager : MonoBehaviour {
         UI.HideDialogMenu();
     }
 
+    public void SelectDialogOption(int choice) {
+        UI.SelectDialogOption(choice);
+    }
+
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
         player.transform.position = pointofentry;
         ftm.transform.position = Vector3.zero;

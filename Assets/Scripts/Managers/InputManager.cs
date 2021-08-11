@@ -29,6 +29,33 @@ public class InputManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.F)) {
             GameManager.app.CloseDialog();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            GameManager.app.SelectDialogOption(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            GameManager.app.SelectDialogOption(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            GameManager.app.SelectDialogOption(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4)) {
+            GameManager.app.SelectDialogOption(4);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5)) {
+            GameManager.app.SelectDialogOption(5);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6)) {
+            GameManager.app.SelectDialogOption(6);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7)) {
+            GameManager.app.SelectDialogOption(7);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8)) {
+            GameManager.app.SelectDialogOption(8);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9)) {
+            GameManager.app.SelectDialogOption(9);
+        }
     }
     /*
         private void UpdateKeyspressed() {

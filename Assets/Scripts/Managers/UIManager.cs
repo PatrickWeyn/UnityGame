@@ -84,16 +84,25 @@ public class UIManager : MonoBehaviour {
             GameObject.Destroy(child.gameObject);
         }
 
-        //Handle dialog text (TODO)
-        for (int i = 0; i < dialog.texts.Count(); i++) {
-            dialogpanel.transform.Find("LBL_NPCText").GetComponent<Text>().text = dialog.texts[i];
-            if (i != dialog.texts.Count() - 1) {
+        //Handle dialog text
+        for (int y = 0; y < dialog.texts.Count(); y++) {
+            dialogpanel.transform.Find("LBL_NPCText").GetComponent<Text>().text = dialog.texts[y];
+            if (y != dialog.texts.Count() - 1) {
                 yield return new WaitForSeconds(2.0f);
             }
         }
 
         //Create new options
-        for (int i = 0; i < dialog.options.Count(); i++) {
+        int i = 0;
+        foreach (Option o in dialog.options) {
+            string msg = "";
+            //Check if option has an ability requirement
+            if (o.GetAbilityName() != null) {
+                if(GameManager.app.player.GetScore(o.GetAbilityName()) < o.GetAbilityValue()){
+                    continue;
+                }
+                msg += "[" + o.GetFullAbilityName() + " check passed] ";
+            }
             //Create new gameobject for an option, and add it to the panel
             GameObject txtobj = new GameObject();
             txtobj.transform.SetParent(dialogpanel.transform.Find("PAN_Responses").gameObject.transform);
@@ -102,20 +111,27 @@ public class UIManager : MonoBehaviour {
             rct.anchorMin = new Vector2(0, 1);
             rct.anchorMax = new Vector2(0, 1);
             rct.pivot = new Vector2(0, 1);
-            rct.anchoredPosition = new Vector2(0, i * -50);
-            rct.sizeDelta = new Vector2(1515, 50);
+            rct.anchoredPosition = new Vector2(30, i * -50);
+            rct.sizeDelta = new Vector2(1485, 50);
             rct.localScale = Vector3.one;
             //Add Text to the gameobject
             Text txt = txtobj.AddComponent<Text>();
             txt.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
             txt.fontSize = 28;
-            txt.alignment = TextAnchor.MiddleCenter;
+            txt.alignment = TextAnchor.MiddleLeft;
             txt.color = Color.white;
-            txt.text = (i + 1).ToString() + ". " + dialog.options[i].text;
+            txt.text = (i + 1).ToString() + ". " + msg + o.GetText();
             //Make button clickable
             OptionButton btn = txtobj.AddComponent<OptionButton>();
-            btn.destination = dialog.options[i].destination;
+            btn.destination = dialog.options[i].GetDestination();
             btn.onClick.AddListener(delegate { StartCoroutine(HandleDialogText(btn.destination)); });
+            i += 1;
+        }
+    }
+
+    public void SelectDialogOption(int choice) {
+        if (choice - 1 <= dialogpanel.transform.Find("PAN_Responses").gameObject.transform.childCount) {
+            dialogpanel.transform.Find("PAN_Responses").gameObject.transform.GetChild(choice - 1).GetComponent<OptionButton>().onClick.Invoke();
         }
     }
 }

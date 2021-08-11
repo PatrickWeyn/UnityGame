@@ -22,10 +22,13 @@ public class FileParser : MonoBehaviour {
                     break;
                 case "*":
                     option = new Option();
-                    option.text = line.Substring((line.IndexOf("\"")+1), (line.LastIndexOf("\"") - line.IndexOf("\"")-1));
-                    option.destination = line.Substring(line.IndexOf(">") + 2, (line.Length - line.IndexOf(">") - 2));
+                    option.SetText(line.Substring((line.IndexOf("\"")+1), (line.LastIndexOf("\"") - line.IndexOf("\"")-1)));
+                    option.SetDestination(line.Substring(line.IndexOf(">") + 2, (line.Length - line.IndexOf(">") - 2)));
+                    if (line.Contains("[")) {
+                        option.SetAbilityName(line.Substring(line.IndexOf("[") + 1, line.IndexOf(":") - (line.IndexOf("[")+1)));
+                        option.SetAbilityValue(int.Parse(line.Substring(line.IndexOf(":") + 1, line.IndexOf("]") - (line.IndexOf(":") + 1))));
+                    }
                     dialog.options.Add(option);
-                    Debug.Log("OPTION ADDED: " + option.text + " | DESTINATION: " + option.destination);
                     break;
                 default:
                     if (line.Contains(">")) {

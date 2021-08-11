@@ -8,7 +8,7 @@ Anything else you wanted to know{tension_high:, rude individual}?
 - intro
 Hail, adventurer! I am an old man, and you are lucky to be one of the first to test out the dialogue functionality of this game! > hub
 - location
-You're at the Castle of Trials! Here is where *hopefully* most of the developer's testing will take place.
+You're at the Castle of Trials! Hopefully, most of the developer's testing will take place here.
 * "I see." > hub
 - nameinterrogation
 Yes. Yes it is.
