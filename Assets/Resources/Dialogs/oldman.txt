@@ -1,0 +1,48 @@
+- intro
+Hail, adventurer! I am an old man, and you are lucky to be one of the first to test out the dialogue functionality of this game!
+* "Hello, old man. Where am i?" > location
+* "Is old man your actual name?" > nameinterrogation
+* "What's the dialogue system do?" > dialogueexplanation
+* "I couldn't care less for this system of yours." > antidialogue
+* "I was actually just exploring the game functionality." > goodbye
+- location
+You're at the Castle of Trials! Here is where *hopefully* most of the developer's testing will take place.
+* "I see." > hub
+- hub
+Anything else you wanted to know{tension_high:, rude individual}?
+* "Where am i?" > location
+* "Is old man your actual name?" > nameinterrogation
+* "What's the dialogue system do?" > dialogueexplanation
+* "I couldn't care less for this system of yours." > antidialogue
+* "I was actually just exploring the game functionality." > goodbye
+- nameinterrogation
+Yes. Yes it is.
+* "Where am i?" > location
+* "What's the dialogue system do?" > dialogueexplanation
+* "I couldn't care less for this system of yours." > antidialogue
+* "I was actually just exploring the game functionality." > goodbye
+- dialogueexplanation
+So, the developers wanted to make the dialogue rather in-depth. I'll give you a couple of tes--... -*examples*- on the next set of options.
+* (+wet) "Why am i suddenly wet?" > wetchoice
+* <CHA:3> "What do you mean with this charisma thing?" > chachoice
+* #tension_up# "I'll smack you square in the face, old fart!" > tensionchoice
+- wetchoice
+Aaah. You see, i'll reference you being wet in another paragraph of text which you may or may not choose in the future! A test of persistence of choice, though the choice in question does not matter.
+* "Okay. Which option should i choose to test this, then?" > testwet
+* (-wet) "Dry me up, man. I didn't ask for this." > defreply
+* "Whatever." > defreply
+- testwet
+Ask me if old man is my actual name.
+* "I'll remember that." > hub
+* "Forget it." > hub
+- defreply
+{tension_high:Letting me down again, eh?|Very well.} > hub
+- chachoice
+This option would have been grayed out if your charisma was lower than three. > hub
+- tensionchoice
+You see, now you've gone and gotten my tension up. That means that i don't like you quite as much as i did before. As you make more choices and behave in certain fashion against certain people, they will start to behave differently.
+Friendly or helpful behavior will lower tension with an individual, and the opposite is also true. As you interact more with characters in the world, their tension pool will increase, and their behavior towards you will settle into a pattern. > hub
+- antidialogue
+Alright. Move along, then. > DONE
+- goodbye
+That's alright. Just talk to me if you want some dialogue interaction. > DONE
