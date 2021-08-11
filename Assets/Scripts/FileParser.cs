@@ -17,19 +17,33 @@ public class FileParser : MonoBehaviour {
                 case "-":
                     dialogs.Add(dialog);
                     dialog = new Dialog();
-                    dialog.id = line.Substring(2, line.Length-2);
+                    dialog.id = line.Substring(2, line.Length - 2);
                     Debug.Log("NEW DIALOG: " + dialog.id);
                     break;
                 case "*":
                     option = new Option();
-                    option.text = line.Substring(line.IndexOf("\""), line.LastIndexOf("\""));
-                    option.destination = line.Substring(line.IndexOf(">")+2, line.Length-line.IndexOf(">")-2);
+                    option.text = line.Substring((line.IndexOf("\"")+1), (line.LastIndexOf("\"") - line.IndexOf("\"")-1));
+                    option.destination = line.Substring(line.IndexOf(">") + 2, (line.Length - line.IndexOf(">") - 2));
                     dialog.options.Add(option);
                     Debug.Log("OPTION ADDED: " + option.text + " | DESTINATION: " + option.destination);
                     break;
                 default:
-                    dialog.texts.Add(line);
-                    Debug.Log("RESPONSE ADDED: " + dialog.texts[dialog.texts.Count()-1]);
+                    if (line.Contains(">")) {
+                        string identifier = line.Substring(line.IndexOf(">") + 2, (line.Length - line.IndexOf(">") - 2));
+                        if (identifier == "DONE") {
+                            dialog.texts.Add(line.Substring(0, line.IndexOf(">")));
+                        }
+                        else {
+                            dialog.texts.Add(line.Substring(0, line.IndexOf(">")));
+                            foreach (Option o in GetDialog(dialogs, identifier).options) {
+                                dialog.options.Add(o);
+                            }
+                        }
+                    }
+                    else {
+                        dialog.texts.Add(line);
+                    }
+                    Debug.Log("RESPONSE ADDED: " + dialog.texts[dialog.texts.Count() - 1]);
                     break;
             }
         }
@@ -37,5 +51,12 @@ public class FileParser : MonoBehaviour {
 
         return dialogs;
 
+    }
+
+    private Dialog GetDialog(List<Dialog> dialogs, string id) {
+        foreach (Dialog d in dialogs) {
+            if (d.id == id) return d;
+        }
+        return null;
     }
 }

@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour {
     public void InitiateDialog() {
         if (closestally != null) {
             Gamestate = 2;
-            UI.InitializeDialog(closestally.GetComponent<SpriteRenderer>().sprite, closestally.name, closestally.GetDialogs());
+            UI.InitializeDialog(closestally);
         }
     }
 

@@ -6,9 +6,15 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
-    //Variables
+    //Children
+    private GameObject dialogpanel;
     //Dialog Handling
-    private List<Dialog> dialogs;
+    private Ally conversationpartner;
+
+    private void Start() {
+        dialogpanel = transform.Find("DialogueBox").gameObject;
+
+    }
 
     public void UpdateWeapon() {
         GameObject weaponpanel = transform.Find("CharacterScreen").Find("CharacterWeapon").gameObject;
@@ -43,40 +49,73 @@ public class UIManager : MonoBehaviour {
     }
 
     //Dialogue Handling
-    public void InitializeDialog(Sprite sprite, string name, List<Dialog> dialogs) {
-        transform.Find("DialogueBox").gameObject.transform.Find("IMG_NPCArt").GetComponent<Image>().sprite = sprite;
-        transform.Find("DialogueBox").gameObject.transform.Find("LBL_NPCName").GetComponent<Text>().text = name;
-        this.dialogs = dialogs;
-        UpdateDialogue(dialogs[0]);
-        transform.Find("DialogueBox").gameObject.SetActive(true);
+    public void InitializeDialog(Ally conversationpartner) {
+        //Apply correct sprite and name
+        dialogpanel.transform.Find("IMG_NPCArt").GetComponent<Image>().sprite = conversationpartner.GetComponent<SpriteRenderer>().sprite;
+        dialogpanel.transform.Find("LBL_NPCName").GetComponent<Text>().text = conversationpartner.name;
+
+        //Store dialogs for this conversation
+        this.conversationpartner = conversationpartner;
+
+        //Fill the dialogbox and options with the contents of the first dialog
+        StartCoroutine(HandleDialogText("intro"));
+
+        //Show the dialogmenu
+        dialogpanel.SetActive(true);
     }
 
-    public void UpdateDialogue(Dialog dialog) {
-        GameObject dialoguepanel = transform.Find("DialogueBox").gameObject;
-        dialoguepanel.transform.Find("LBL_NPCText").GetComponent<Text>().text = dialog.texts[0];
-        for (int i = 0; i < dialog.options.Count()-1; i++) {
-            //Create new gameobject for an option
+    public void HideDialogMenu() {
+        transform.Find("DialogueBox").gameObject.SetActive(false);
+    }
+
+    public Dialog GetDialog(string id) {
+        foreach (Dialog d in conversationpartner.GetDialogs()) {
+            if (d.id == id) return d;
+        }
+        return null;
+    }
+
+    IEnumerator HandleDialogText(string identifier) {
+        //Find the correct dialog
+        Dialog dialog = GetDialog(identifier);
+
+        //Removes all previous options
+        foreach (Transform child in dialogpanel.transform.Find("PAN_Responses").gameObject.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        //Handle dialog text (TODO)
+        for (int i = 0; i < dialog.texts.Count(); i++) {
+            dialogpanel.transform.Find("LBL_NPCText").GetComponent<Text>().text = dialog.texts[i];
+            if (i != dialog.texts.Count() - 1) {
+                yield return new WaitForSeconds(2.0f);
+            }
+        }
+
+        //Create new options
+        for (int i = 0; i < dialog.options.Count(); i++) {
+            //Create new gameobject for an option, and add it to the panel
             GameObject txtobj = new GameObject();
-            txtobj.transform.SetParent(dialoguepanel.transform.Find("PAN_Responses").gameObject.transform);
-            //Add RectTransform
+            txtobj.transform.SetParent(dialogpanel.transform.Find("PAN_Responses").gameObject.transform);
+            //Position the gameobject properly on said panel
             RectTransform rct = txtobj.AddComponent<RectTransform>();
             rct.anchorMin = new Vector2(0, 1);
             rct.anchorMax = new Vector2(0, 1);
             rct.pivot = new Vector2(0, 1);
-            rct.anchoredPosition = new Vector2(0, i*-50);
+            rct.anchoredPosition = new Vector2(0, i * -50);
             rct.sizeDelta = new Vector2(1515, 50);
             rct.localScale = Vector3.one;
-            //Add Text
+            //Add Text to the gameobject
             Text txt = txtobj.AddComponent<Text>();
             txt.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
             txt.fontSize = 28;
             txt.alignment = TextAnchor.MiddleCenter;
             txt.color = Color.white;
-            txt.text = dialog.options[i].text;
+            txt.text = (i + 1).ToString() + ". " + dialog.options[i].text;
+            //Make button clickable
+            OptionButton btn = txtobj.AddComponent<OptionButton>();
+            btn.destination = dialog.options[i].destination;
+            btn.onClick.AddListener(delegate { StartCoroutine(HandleDialogText(btn.destination)); });
         }
-    }
-
-    public void HideDialogMenu() {
-        transform.Find("DialogueBox").gameObject.SetActive(false);
     }
 }
