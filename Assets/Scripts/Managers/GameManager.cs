@@ -41,9 +41,9 @@ public class GameManager : MonoBehaviour {
     }
 
     public void Update() {
-        foreach (Ally ally in alliesinrange) {
-            if (Vector3.Distance(player.transform.position, closestally.transform.position) > Vector3.Distance(player.transform.position, ally.transform.position)) {
-                closestally = ally;
+        for (int i = 0; i < alliesinrange.Count; i++) {
+            if (Vector3.Distance(player.transform.position, closestally.transform.position) > Vector3.Distance(player.transform.position, alliesinrange[i].transform.position)) {
+                closestally = alliesinrange[i];
             }
         }
     }

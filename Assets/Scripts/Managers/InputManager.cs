@@ -29,6 +29,9 @@ public class InputManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.B)) {
             GameManager.app.HandleMenu();
         }
+        if (Input.GetKeyDown(KeyCode.Mouse0)) {
+            GameManager.app.player.GetWeapon().Swing();
+        }
     }
 
     private void DialogStateInput() {

@@ -20,7 +20,6 @@ public abstract class Creature : MonoBehaviour {
     public int maxhealth;
     public float pushrecovery;
 
-
     private Vector3 pushdirection;
     private RaycastHit2D hit;
 

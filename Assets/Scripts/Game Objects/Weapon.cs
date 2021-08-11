@@ -15,23 +15,14 @@ public class Weapon : MonoBehaviour
     }
 
     public void OnTriggerStay2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Fighter" && collision.GetType() == typeof(BoxCollider2D))
+        if (collision.gameObject.tag == "Fighter")
             collision.gameObject.SendMessage("ReceiveDamage", new Damage(Random.Range(weapon.mindmg, weapon.maxdmg), weapon.pushback, this.transform.parent.gameObject));
     }
 
-    private void Swing() {
-        if (Time.time - lastswing > weapon.cooldown) { 
+    public void Swing() {
+        if (Time.time - lastswing > weapon.cooldown && gameObject.transform.parent.name == "Player") { 
         lastswing = Time.time;
         anim.SetTrigger("Swing");
-        }
-        else {
-            Debug.Log("Your swing is on cooldown!");
-        }
-    }
-
-    private void Update() {
-        if (Input.GetMouseButtonDown(0) && gameObject.transform.parent.name == "Player") {
-            Swing();
         }
     }
 }

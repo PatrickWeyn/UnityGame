@@ -9,6 +9,7 @@ public class Player : Creature {
     //Detection Aura
 
     private int experience;
+    private Weapon weapon;
     public int unusedabilitypoints;
 
     private void Start() {
@@ -22,6 +23,7 @@ public class Player : Creature {
         WIS = 1;
         CHA = 1;
         unusedabilitypoints = 5;
+        weapon = gameObject.transform.Find("Weapon").GetComponent<Weapon>();
         GameManager.app.UI.SendMessage("UpdateAbilityScores");
         GameManager.app.UI.SendMessage("UpdateStats");
     }
@@ -50,7 +52,7 @@ public class Player : Creature {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
 
-        this.MoveCreature(new Vector3(x, y, 0));
+        MoveCreature(new Vector3(x, y, 0));
     }
 
     public void AddScore(string ability) {
@@ -66,5 +68,13 @@ public class Player : Creature {
             }
             GameManager.app.UI.SendMessage("UpdateAbilityScores");
         }
+    }
+
+    public Weapon GetWeapon() {
+        return weapon;
+    }
+
+    public void SetWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
 }

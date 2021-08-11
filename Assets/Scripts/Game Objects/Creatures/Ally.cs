@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Ally : NPC {
     //Constants
-    private static float DETECTIONRANGE = 0.32f;
+    private const float DETECTIONRANGE = 0.32f;
 
-    //Variables
-    public string name;
-    
-    //Dialog
-    private bool playerinrange;
+    //Unity-Accessible Variables
+    public string fullname;
     public string dialoguefile;
+
+    //Dialog Variables
+    private bool playerinrange;
     private List<Dialog> dialogs;
 
         private void Update() {
