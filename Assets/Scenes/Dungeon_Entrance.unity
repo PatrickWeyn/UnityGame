@@ -24909,6 +24909,8 @@ MonoBehaviour:
   maxhealth: 5
   pushrecovery: 1
   xp: 1
+  name: Old Man
+  dialoguefile: oldman.txt
 --- !u!61 &1975811818
 BoxCollider2D:
   m_ObjectHideFlags: 0

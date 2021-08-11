@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
     public Weapon weapon;
     public EventSystem eventsys;
     public InputManager im;
+    public FileParser fp;
 
     private List<Ally> alliesinrange;
     private Ally closestally;
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(eventsys);
         DontDestroyOnLoad(im);
+        DontDestroyOnLoad(fp);
         Gamestate = 1;
         alliesinrange = new List<Ally>();
 
@@ -44,7 +46,6 @@ public class GameManager : MonoBehaviour {
                 closestally = ally;
             }
         }
-        Debug.Log("There are " + alliesinrange.Count() + " in range.");
     }
 
     public void TrackNearbyNPC(Ally ally) {
@@ -52,6 +53,9 @@ public class GameManager : MonoBehaviour {
             closestally = ally;
         }
         alliesinrange.Add(ally);
+        if (ally.GetDialogs() == null) {
+            ally.SetDialogs(fp.ParseDialog(ally.dialoguefile));
+        }
     }
 
     public void UntrackNearbyNPC(Ally ally) {
@@ -64,7 +68,7 @@ public class GameManager : MonoBehaviour {
     public void InitiateDialog() {
         if (closestally != null) {
             Gamestate = 2;
-            UI.ShowDialogMenu(closestally.Dialog);
+            UI.InitializeDialog(closestally.GetComponent<SpriteRenderer>().sprite, closestally.name, closestally.GetDialogs());
         }
     }
 

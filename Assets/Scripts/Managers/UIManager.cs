@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
+
+    //Variables
+    //Dialog Handling
+    private List<Dialog> dialogs;
 
     public void UpdateWeapon() {
         GameObject weaponpanel = transform.Find("CharacterScreen").Find("CharacterWeapon").gameObject;
@@ -37,34 +42,38 @@ public class UIManager : MonoBehaviour {
         statspanel.transform.Find("XP").GetComponent<Text>().text = GameManager.app.player.GetExperience().ToString();
     }
 
-    public void UpdateDialogue(Dialog dialog) {
-        GameObject dialoguepanel = transform.Find("DialogueBox").gameObject;
-        dialoguepanel.transform.Find("IMG_NPCArt").GetComponent<Image>().sprite = dialog.Character;
-        dialoguepanel.transform.Find("LBL_NPCName").GetComponent<Text>().text = dialog.Firstname + " " + dialog.Lastname;
-        dialoguepanel.transform.Find("LBL_NPCText").GetComponent<Text>().text = dialog.Response;
-        //Create new gameobject for an option
-        GameObject txtobj = new GameObject();
-        txtobj.transform.SetParent(dialoguepanel.transform.Find("PAN_Responses").gameObject.transform);
-        //Add RectTransform
-        RectTransform rct = txtobj.AddComponent<RectTransform>();
-        rct.anchorMin = new Vector2(0, 1);
-        rct.anchorMax = new Vector2(0, 1);
-        rct.pivot = new Vector2(0, 1);
-        rct.anchoredPosition = Vector2.zero;
-        rct.sizeDelta = new Vector2(1515, 50);
-        rct.localScale = Vector3.one;
-        //Add Text
-        Text txt = txtobj.AddComponent<Text>();
-        txt.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
-        txt.fontSize = 28;
-        txt.alignment = TextAnchor.MiddleCenter;
-        txt.color = Color.white;
-        txt.text = dialog.Option;
+    //Dialogue Handling
+    public void InitializeDialog(Sprite sprite, string name, List<Dialog> dialogs) {
+        transform.Find("DialogueBox").gameObject.transform.Find("IMG_NPCArt").GetComponent<Image>().sprite = sprite;
+        transform.Find("DialogueBox").gameObject.transform.Find("LBL_NPCName").GetComponent<Text>().text = name;
+        this.dialogs = dialogs;
+        UpdateDialogue(dialogs[0]);
+        transform.Find("DialogueBox").gameObject.SetActive(true);
     }
 
-    public void ShowDialogMenu(Dialog dialog) {
-        UpdateDialogue(dialog);
-        transform.Find("DialogueBox").gameObject.SetActive(true);
+    public void UpdateDialogue(Dialog dialog) {
+        GameObject dialoguepanel = transform.Find("DialogueBox").gameObject;
+        dialoguepanel.transform.Find("LBL_NPCText").GetComponent<Text>().text = dialog.texts[0];
+        for (int i = 0; i < dialog.options.Count()-1; i++) {
+            //Create new gameobject for an option
+            GameObject txtobj = new GameObject();
+            txtobj.transform.SetParent(dialoguepanel.transform.Find("PAN_Responses").gameObject.transform);
+            //Add RectTransform
+            RectTransform rct = txtobj.AddComponent<RectTransform>();
+            rct.anchorMin = new Vector2(0, 1);
+            rct.anchorMax = new Vector2(0, 1);
+            rct.pivot = new Vector2(0, 1);
+            rct.anchoredPosition = new Vector2(0, i*-50);
+            rct.sizeDelta = new Vector2(1515, 50);
+            rct.localScale = Vector3.one;
+            //Add Text
+            Text txt = txtobj.AddComponent<Text>();
+            txt.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+            txt.fontSize = 28;
+            txt.alignment = TextAnchor.MiddleCenter;
+            txt.color = Color.white;
+            txt.text = dialog.options[i].text;
+        }
     }
 
     public void HideDialogMenu() {

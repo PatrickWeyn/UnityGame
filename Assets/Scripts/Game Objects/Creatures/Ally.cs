@@ -6,16 +6,15 @@ public class Ally : NPC {
     //Constants
     private static float DETECTIONRANGE = 0.32f;
 
-    //Test Data (delete in method Start())
-    private Dialog dialog;
-
+    //Variables
+    public string name;
+    
+    //Dialog
     private bool playerinrange;
+    public string dialoguefile;
+    private List<Dialog> dialogs;
 
-    private void Start() {
-        dialog = new Dialog(this.GetComponent<SpriteRenderer>().sprite, "Brent", "Halligan", "Hail traveler, what seems to be the issue?", "Nothing");
-    }
-
-    private void Update() {
+        private void Update() {
         if (DETECTIONRANGE > Vector3.Distance(transform.position, GameManager.app.player.transform.position)) {
             if (!playerinrange) {
                 playerinrange = true;
@@ -27,7 +26,11 @@ public class Ally : NPC {
         }
     }
 
+    public void SetDialogs(List<Dialog> dialogs) {
+        this.dialogs = dialogs;
+    }
 
-    //Variable Getters and Setters
-    public Dialog Dialog { get => dialog; set => dialog = value; }
+    public List<Dialog> GetDialogs() {
+        return dialogs;
+    }
 }
