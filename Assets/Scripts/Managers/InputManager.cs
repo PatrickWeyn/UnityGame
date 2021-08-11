@@ -16,12 +16,18 @@ public class InputManager : MonoBehaviour {
             case 2:
                 DialogStateInput();
                 break;
+            case 3:
+                MenuStateInput();
+                break;
         }
     }
 
     private void DefaultStateInput() {
         if (Input.GetKeyDown(KeyCode.F)) {
             GameManager.app.InitiateDialog();
+        }
+        if (Input.GetKeyDown(KeyCode.B)) {
+            GameManager.app.HandleMenu();
         }
     }
 
@@ -57,6 +63,13 @@ public class InputManager : MonoBehaviour {
             GameManager.app.SelectDialogOption(9);
         }
     }
+
+    private void MenuStateInput() {
+        if (Input.GetKeyDown(KeyCode.B)) {
+            GameManager.app.HandleMenu();
+        }
+    }
+
     /*
         private void UpdateKeyspressed() {
             if (Input.anyKeyDown) {

@@ -8,12 +8,13 @@ public class UIManager : MonoBehaviour {
 
     //Children
     private GameObject dialogpanel;
+    private GameObject characterscreen;
     //Dialog Handling
     private Ally conversationpartner;
 
     private void Start() {
         dialogpanel = transform.Find("DialogueBox").gameObject;
-
+        characterscreen = transform.Find("CharacterScreen").gameObject;
     }
 
     public void UpdateWeapon() {
@@ -65,7 +66,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public void HideDialogMenu() {
-        transform.Find("DialogueBox").gameObject.SetActive(false);
+        dialogpanel.SetActive(false);
     }
 
     public Dialog GetDialog(string id) {
@@ -133,5 +134,17 @@ public class UIManager : MonoBehaviour {
         if (choice - 1 <= dialogpanel.transform.Find("PAN_Responses").gameObject.transform.childCount) {
             dialogpanel.transform.Find("PAN_Responses").gameObject.transform.GetChild(choice - 1).GetComponent<OptionButton>().onClick.Invoke();
         }
+    }
+
+    public void HandleCharacterScreen() {
+        bool state = false;
+        if (!characterscreen.activeSelf) {
+            state = true;
+        }
+        characterscreen.SetActive(state);
+    }
+
+    public bool MenuActive() {
+        return characterscreen.activeSelf;
     }
 }

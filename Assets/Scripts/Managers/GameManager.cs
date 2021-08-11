@@ -86,6 +86,16 @@ public class GameManager : MonoBehaviour {
         ftm.transform.position = Vector3.zero;
     }
 
+    public void HandleMenu() {
+        if (UI.MenuActive()) {
+            Gamestate = 1;
+        }
+        else { 
+        Gamestate = 3;
+        }
+        UI.HandleCharacterScreen();
+    }
+
     //Variable getters and setters
     public int Gamestate { get => gamestate; set => gamestate = value; }
 }
