@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour {
     //Children
     private GameObject dialogpanel;
     private GameObject characterscreen;
+
     //Dialog Handling
     private Ally conversationpartner;
 
@@ -18,8 +19,8 @@ public class UIManager : MonoBehaviour {
     }
 
     public void UpdateWeapon() {
-        GameObject weaponpanel = transform.Find("CharacterScreen").Find("CharacterWeapon").gameObject;
-        Weapon weapon = GameManager.app.player.transform.Find("Weapon").GetComponent<Weapon>();
+        GameObject weaponpanel = characterscreen.transform.Find("CharacterWeapon").gameObject;
+        Weapon weapon = GameManager.app.player.GetWeapon();
         weaponpanel.transform.Find("MinDmg").GetComponent<Text>().text = weapon.weapon.mindmg.ToString();
         weaponpanel.transform.Find("MaxDmg").GetComponent<Text>().text = (weapon.weapon.maxdmg - 1).ToString();
         weaponpanel.transform.Find("Pushback").GetComponent<Text>().text = weapon.weapon.pushback.ToString();
@@ -28,7 +29,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public void UpdateAbilityScores() {
-        GameObject abilityscorepanel = transform.Find("CharacterScreen").Find("CharacterAbilityScores").gameObject;
+        GameObject abilityscorepanel = characterscreen.transform.Find("CharacterAbilityScores").gameObject;
         abilityscorepanel.transform.Find("STR").GetComponent<Text>().text = GameManager.app.player.STR.ToString();
         abilityscorepanel.transform.Find("DEX").GetComponent<Text>().text = GameManager.app.player.DEX.ToString();
         abilityscorepanel.transform.Find("CON").GetComponent<Text>().text = GameManager.app.player.CON.ToString();
@@ -36,6 +37,7 @@ public class UIManager : MonoBehaviour {
         abilityscorepanel.transform.Find("WIS").GetComponent<Text>().text = GameManager.app.player.WIS.ToString();
         abilityscorepanel.transform.Find("CHA").GetComponent<Text>().text = GameManager.app.player.CHA.ToString();
         abilityscorepanel.transform.Find("Explanation").GetComponent<Text>().text = "Unused Skill Points: " + GameManager.app.player.unusedabilitypoints.ToString();
+        //TODO - optimize
         if (GameManager.app.player.unusedabilitypoints == 0) {
             foreach (Button b in FindObjectsOfType<Button>()) {
                 b.gameObject.SetActive(false);
@@ -44,7 +46,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public void UpdateStats() {
-        GameObject statspanel = transform.Find("CharacterScreen").Find("CharacterStats").gameObject;
+        GameObject statspanel = characterscreen.transform.Find("CharacterStats").gameObject;
         statspanel.transform.Find("HP").GetComponent<Text>().text = GameManager.app.player.maxhealth.ToString();
         statspanel.transform.Find("XP").GetComponent<Text>().text = GameManager.app.player.GetExperience().ToString();
     }
