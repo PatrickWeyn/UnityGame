@@ -5,4 +5,6 @@ using UnityEngine;
 public class OptionButton : UnityEngine.UI.Button
 {
     public string destination;
+    public string opinion;
+    public int value;
 }

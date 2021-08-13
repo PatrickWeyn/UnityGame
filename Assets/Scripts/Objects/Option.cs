@@ -9,6 +9,8 @@ public class Option
     private string destination;
     private string abilityname;
     private int abilityvalue;
+    private string opinionname;
+    private int opinionvalue;
 
     public void SetText(string text) {
         this.text = text;
@@ -66,4 +68,20 @@ public class Option
         }
         return fullname;
     }
+
+    public void SetOpinionName(string opinionname) {
+        this.opinionname = opinionname;
+        }
+
+    public void SetOpinionValue(int value) {
+        opinionvalue = value;
+        }
+
+    public string GetOpinionName() {
+        return opinionname;
+        }
+
+    public int GetOpinionValue() {
+        return opinionvalue;
+        }
 }

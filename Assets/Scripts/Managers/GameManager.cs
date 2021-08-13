@@ -67,8 +67,12 @@ public class GameManager : MonoBehaviour {
 
     public void InitiateDialog() {
         if (closestally != null) {
+            //Game enters Dialog State
             Gamestate = 2;
-            UI.InitializeDialog(closestally);
+            //Set the closest ally as conversation partner
+            UI.SetConversationPartner(closestally);
+            //Start the Dialog
+            UI.StartDialog();
         }
     }
 

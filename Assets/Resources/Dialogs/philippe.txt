@@ -1,0 +1,74 @@
+- greeting
+Leave me alone. Haven't you done enough?/Why are you standing still? Do you think that the world waits for you while you stand there drooling? Get back out there and get to work!/Can't you see i'm busy?/ I thought i told you to get lost.
+* "Yes, sir." > submissive
+* "I think you may have me confused with someone else." > confusion
+* "Who do you think you are, talking to me that way?" > haughty
+- submissive
+Don't make eye contact with me! Look at the floor. And get back to work! > DONE
+- confusion
+Oh really? So despite your filthy face and your vacant expression and your complete lack of human dignity, you're telling me you're not a server?
+* "That's right. I don't work for you." > server
+* "<Lie> Oh no, you have it right. I'm a server." > server
+* [CHA:5] "<Lie> I'm here to talk business. Interested in putting out a cookbook?" > cookbook
+* [WIS:5] "Your predisposition towards anger suggests unresolved issues in your past." > medicinalconfusion
+* "I'm a new honorary member of the White Glove Society" > whiteglove
+- haughty
+Who do-? Who the fuck do you think I am? I'm the fucking god of New Vegas brahmin fusion cuisine, that's who.
+No. No. That doesn't even give me the credit I deserve. I fucking invented edible food!
+Do you like eating? Good. You owe me your entire goddamned garbage existence.
+Now get the hell out of my sight, or I'll bathe your face in the deep fryer.
+* "I think you may have me confused with someone else." > confusion
+* "I'll go back to my job now." > submissive
+* "<Attack> You'll be feeding birds when I'm through with you." > hostile
+- hostile [Attack]
+I'll carve that stupid look off your inbred face! > DONE
+- server
+Well then why the fuck are you still standing there like you aren't the lowest form of life ever to be flushed down the evolutionary toilet? > DONE
+- cookbook
+[SUCCEEDED] What, me? The supreme ruler of the Nevada dining scene? Teach lowlife half-wits to make food that doesn't smell like burning excrement?
+Do you think it would sell?
+* [CHA:5] "It'll be huge. I'll advance you a hundred caps, plus half the gross." > cookbooksucces
+* "Yes. We're a major publisher. But as a sign of good faith I'll need recipes." > cookbookmediocre
+- cookbookmediocre
+(grunts) You're pushing your luck. Here. I have a few copies on me. This better be good enough.
+We're going to have a real problem if this thing isn't a hit.
+* "Uh... how about you give me your recipes and then we'll see." > cookbookfailure
+* "I'll advance you a hundred caps and then... wait, i don't have that much on me." > cookbookfailure2
+- cookbookfailure2
+A hundred caps? I have that much between the cushions of my day bed.
+Come back when you've got a serious offer.
+- cookbookfailure
+Yes, of course.
+[FAILED] There's nothing I'd like more than to hand the deepest secrets of my artistry to some idiot in exchange for a dirty handful of caps.
+- cookbooksucces
+[SUCCEEDED] All right. Don't get me wrong, I love my job here, but they don't pay me what I'm worth. Too many people skimming off the top.
+Take these. Should be plenty for a book in there. That's all I'm giving. Don't expect me to write some fancy introduction.
+- medicinalconfusion
+[?] What kind of harebrained fucking psychobabble bullshit is that?
+I yell at people because I like yelling at people and because they fucking deserve it. Not because Mumsy and Daddy-kins didn't hug me enough.
+* [WIS:5] "You may be projecting. Tell me more about your parents." > psychology
+- whiteglove
+Well what do you want? I'm very busy here.
+* "I was just wondering where i could find tonight's wines." > wines
+* [CHA:4] "I think i saw a radroach in the pantry. You should check it out." > radroach
+* "Would you, uh, go step in the pantry for a minute?" > pantry
+- radroach
+[SUCCEEDED] No! It'll ruin my ingredients! > DONE
+-pantry
+[FAILED] Now why the fuck would I do that? I don't have time for games. Stop wasting my time. > DONE
+- wines
+Well why don't you fucking try checking the serving table in the wine room, for fuck's sake? Circular room, two rooms down? Ring any bells? Christ!
+Now don't speak to me again or I swear I'll serve you as the main course. > DONE
+- psychology
+[?] Oh. I see how it is. You think because my father walked out on us when I was five, now I have to yell at people.
+Or because my mother was a deranged chem fiend who regularly brought strange men home who told me to call them uncle.
+Or because my sisters would lock me in a shipping crate when they didn't want me around... and my brother...
+God, I'd forgotten about that. How could they do that to me?
+[SUCCEEDED] I... I can't stay here. I need to be alone.
+* "What about the banquet?" > psychology2
+* "You go do that, then." > psychology3
+- psychology2
+Forget about the fucking banquet. You know what? You can do it. You be the star chef. Take my recipes.	
+It won't fill the hole, though. Just remember that. You'll always feel empty. > DONE
+- psychology3
+How could they treat me like that? > DONE

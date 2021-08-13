@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
 
     //Children
     private GameObject dialogpanel;
+    private GameObject responsepanel;
     private GameObject characterscreen;
 
     //Dialog Handling
@@ -16,6 +17,7 @@ public class UIManager : MonoBehaviour {
     private void Start() {
         dialogpanel = transform.Find("DialogueBox").gameObject;
         characterscreen = transform.Find("CharacterScreen").gameObject;
+        responsepanel = dialogpanel.transform.Find("PAN_Responses").Find("Viewport").Find("Content").gameObject;
     }
 
     public void UpdateWeapon() {
@@ -52,19 +54,18 @@ public class UIManager : MonoBehaviour {
     }
 
     //Dialogue Handling
-    public void InitializeDialog(Ally conversationpartner) {
+    public void StartDialog() {
         //Apply correct sprite and name
         dialogpanel.transform.Find("IMG_NPCArt").GetComponent<Image>().sprite = conversationpartner.GetComponent<SpriteRenderer>().sprite;
         dialogpanel.transform.Find("LBL_NPCName").GetComponent<Text>().text = conversationpartner.name;
 
-        //Store dialogs for this conversation
-        this.conversationpartner = conversationpartner;
-
-        //Fill the dialogbox and options with the contents of the first dialog
-        StartCoroutine(HandleDialogText("intro"));
-
         //Show the dialogmenu
+        StartCoroutine(HandleDialogText(conversationpartner.GetDialogs()[0].id));
         dialogpanel.SetActive(true);
+    }
+
+    public void SetConversationPartner(Ally closestally) {
+        this.conversationpartner = closestally;
     }
 
     public void HideDialogMenu() {
@@ -72,69 +73,115 @@ public class UIManager : MonoBehaviour {
     }
 
     public Dialog GetDialog(string id) {
-        foreach (Dialog d in conversationpartner.GetDialogs()) {
-            if (d.id == id) return d;
+        for (int counter = 0; counter < conversationpartner.GetDialogs().Count; counter++) {
+            if (conversationpartner.GetDialogs()[counter].id == id) return conversationpartner.GetDialogs()[counter];
         }
-        return null;
+
+        throw new MissingReferenceException("UIManager.cs - GetDialog() - value \"" + id + "\" is not found. Check the dialog file for " + conversationpartner.name + " and verify that there are no writing mistakes or formatting errors.");
     }
 
-    IEnumerator HandleDialogText(string identifier) {
-        //Find the correct dialog
+    public IEnumerator HandleDialogText(string identifier, string opinion = null, int value = 0) {
+        //Local Variable declaration
+        int counter;
+        string msg;
+        Color color;
+        bool clickable;
+
+        //Add value to conversationpartner's opinion score
+        conversationpartner.AddOpinionScore(opinion, value);
+
+        //1. Find the correct dialog (throws exception if none found)
         Dialog dialog = GetDialog(identifier);
 
-        //Removes all previous options
-        foreach (Transform child in dialogpanel.transform.Find("PAN_Responses").gameObject.transform) {
-            GameObject.Destroy(child.gameObject);
+        //2. Destroy the previous options
+        for (counter = 0; counter < responsepanel.transform.childCount; counter++) {
+            GameObject.Destroy(responsepanel.transform.GetChild(counter).gameObject);
         }
 
-        //Handle dialog text
-        for (int y = 0; y < dialog.texts.Count(); y++) {
-            dialogpanel.transform.Find("LBL_NPCText").GetComponent<Text>().text = dialog.texts[y];
-            if (y != dialog.texts.Count() - 1) {
+        //3. Show one line of dialog every two seconds
+        for (counter = 0; counter < dialog.texts.Count(); counter++) {
+            if (dialog.texts[counter].Contains("{")) {
+                switch (conversationpartner.GetOpinion()) {
+                case "relaxed":
+                    dialogpanel.transform.Find("LBL_NPCText").GetComponent<Text>().text = dialog.texts[counter].Substring((dialog.texts[counter].IndexOf("{") + 1), dialog.texts[counter].IndexOf("|") - dialog.texts[counter].IndexOf("{") - 1);
+                    break;
+                case "neutral":
+                    dialogpanel.transform.Find("LBL_NPCText").GetComponent<Text>().text = dialog.texts[counter].Substring((dialog.texts[counter].IndexOf("|") + 1), dialog.texts[counter].LastIndexOf("|") - dialog.texts[counter].IndexOf("|") - 1);
+                    break;
+                case "tense":
+                    dialogpanel.transform.Find("LBL_NPCText").GetComponent<Text>().text = dialog.texts[counter].Substring((dialog.texts[counter].LastIndexOf("|") + 1), dialog.texts[counter].IndexOf("}") - dialog.texts[counter].LastIndexOf("|") - 1);
+                    break;
+                }
+
+            } else {
+                dialogpanel.transform.Find("LBL_NPCText").GetComponent<Text>().text = dialog.texts[counter];
+            }
+            if (counter != dialog.texts.Count() - 1 || dialog.options.Count == 0) {
                 yield return new WaitForSeconds(2.0f);
             }
         }
 
-        //Create new options
-        int i = 0;
-        foreach (Option o in dialog.options) {
-            string msg = "";
-            //Check if option has an ability requirement
-            if (o.GetAbilityName() != null) {
-                if(GameManager.app.player.GetScore(o.GetAbilityName()) < o.GetAbilityValue()){
-                    continue;
+        if (dialog.options.Count != 0) {
+            //4. When the last line of dialog is shown, create the new options
+            for (counter = 0; counter < dialog.options.Count; counter++) {
+
+                //reset option variables;
+                msg = "";
+                color = Color.white;
+                clickable = true;
+
+                //Check if the player passes any ability checks that are required...
+                if (dialog.options[counter].GetAbilityName() != null) {
+                    if (GameManager.app.player.GetScore(dialog.options[counter].GetAbilityName()) < dialog.options[counter].GetAbilityValue()) {
+
+                        //...Gray out the option, make it unclickable if he doesn't...
+                        color = new Color(0.7f, 0.7f, 0.7f, 1);
+                        clickable = false;
+                    }
+
+                    //..and add the text to show that this option requires an ability score check
+                    msg += "[" + dialog.options[counter].GetFullAbilityName() + " " + dialog.options[counter].GetAbilityValue() + "] ";
                 }
-                msg += "[" + o.GetFullAbilityName() + " check passed] ";
+
+                //Create new gameobject for an option, and add it to the panel...
+                GameObject txtobj = new GameObject();
+                txtobj.transform.SetParent(responsepanel.transform);
+
+                //...Position the gameobject properly on said panel...
+                RectTransform rct = txtobj.AddComponent<RectTransform>();
+                rct.sizeDelta = new Vector2(1445, 50);
+                rct.localScale = Vector3.one;
+
+                //...Add the option-text to the gameobject...
+                Text txt = txtobj.AddComponent<Text>();
+                txt.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+                txt.fontSize = 28;
+                txt.alignment = TextAnchor.MiddleLeft;
+                txt.color = color;
+                txt.text = (counter + 1).ToString() + ". " + msg + dialog.options[counter].GetText();
+
+                //..make the button clickable if the required ability check, if any, was succesful.
+                if (clickable) {
+                    OptionButton btn = txtobj.AddComponent<OptionButton>();
+                    btn.destination = dialog.options[counter].GetDestination();
+                    //If the button adds or removes tension, add it to the button now.
+                    if (dialog.options[counter].GetOpinionName() != null) {
+                        btn.opinion = dialog.options[counter].GetOpinionName();
+                        btn.value = dialog.options[counter].GetOpinionValue();
+                        btn.onClick.AddListener(delegate { StartCoroutine(HandleDialogText(btn.destination, btn.opinion, btn.value)); });
+                    } else {
+                        btn.onClick.AddListener(delegate { StartCoroutine(HandleDialogText(btn.destination)); });
+                    }
+                }
             }
-            //Create new gameobject for an option, and add it to the panel
-            GameObject txtobj = new GameObject();
-            txtobj.transform.SetParent(dialogpanel.transform.Find("PAN_Responses").gameObject.transform);
-            //Position the gameobject properly on said panel
-            RectTransform rct = txtobj.AddComponent<RectTransform>();
-            rct.anchorMin = new Vector2(0, 1);
-            rct.anchorMax = new Vector2(0, 1);
-            rct.pivot = new Vector2(0, 1);
-            rct.anchoredPosition = new Vector2(30, i * -50);
-            rct.sizeDelta = new Vector2(1485, 50);
-            rct.localScale = Vector3.one;
-            //Add Text to the gameobject
-            Text txt = txtobj.AddComponent<Text>();
-            txt.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
-            txt.fontSize = 28;
-            txt.alignment = TextAnchor.MiddleLeft;
-            txt.color = Color.white;
-            txt.text = (i + 1).ToString() + ". " + msg + o.GetText();
-            //Make button clickable
-            OptionButton btn = txtobj.AddComponent<OptionButton>();
-            btn.destination = dialog.options[i].GetDestination();
-            btn.onClick.AddListener(delegate { StartCoroutine(HandleDialogText(btn.destination)); });
-            i += 1;
+        } else {
+            GameManager.app.CloseDialog();
         }
     }
 
     public void SelectDialogOption(int choice) {
-        if (choice - 1 <= dialogpanel.transform.Find("PAN_Responses").gameObject.transform.childCount) {
-            dialogpanel.transform.Find("PAN_Responses").gameObject.transform.GetChild(choice - 1).GetComponent<OptionButton>().onClick.Invoke();
+        if (choice - 1 <= responsepanel.transform.childCount) {
+            responsepanel.transform.GetChild(choice - 1).GetComponent<OptionButton>().onClick.Invoke();
         }
     }
 

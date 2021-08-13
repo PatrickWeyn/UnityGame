@@ -35,9 +35,6 @@ public class InputManager : MonoBehaviour {
     }
 
     private void DialogStateInput() {
-        if (Input.GetKeyDown(KeyCode.F)) {
-            GameManager.app.CloseDialog();
-        }
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
             GameManager.app.SelectDialogOption(1);
         }

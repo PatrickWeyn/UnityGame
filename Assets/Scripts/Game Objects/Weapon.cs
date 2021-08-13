@@ -11,7 +11,6 @@ public class Weapon : MonoBehaviour
 
     private void Start() {
         anim = GetComponent<Animator>();
-        GameManager.app.UI.SendMessage("UpdateWeapon");
     }
 
     public void OnTriggerStay2D(Collider2D collision) {

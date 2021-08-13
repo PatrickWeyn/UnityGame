@@ -7,14 +7,15 @@ public class Ally : NPC {
     private const float DETECTIONRANGE = 0.32f;
 
     //Unity-Accessible Variables
-    public string fullname;
     public string dialoguefile;
 
     //Dialog Variables
     private bool playerinrange;
     private List<Dialog> dialogs;
+    private int tension = 1;
+    private int relaxation = 1;
 
-        private void Update() {
+    private void Update() {
         if (DETECTIONRANGE > Vector3.Distance(transform.position, GameManager.app.player.transform.position)) {
             if (!playerinrange) {
                 playerinrange = true;
@@ -32,5 +33,28 @@ public class Ally : NPC {
 
     public List<Dialog> GetDialogs() {
         return dialogs;
+    }
+
+    public void AddOpinionScore(string opinion, int value) {
+        switch (opinion) {
+        case "tension":
+            tension += value;
+            Debug.Log("influence: " + name + " -" + value);
+            break;
+        case "relaxation":
+            relaxation += value;
+            Debug.Log("influence: " + name + " +" + value);
+            break;
+        }
+    }
+
+    public string GetOpinion() {
+        double score = relaxation / (relaxation / tension);
+        if (score > 0.7) {
+            return "relaxed";
+        } else if (score < 0.3) {
+            return "tense";
+        }
+        return "neutral";
     }
 }
