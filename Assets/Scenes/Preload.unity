@@ -1778,7 +1778,8 @@ SpriteRenderer:
   m_SortingLayerID: 2056448005
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1747544985102681446, guid: 22ab7d759797fee4d997839bdb65f23c, type: 3}
+  m_Sprite: {fileID: -1747544985102681446, guid: 22ab7d759797fee4d997839bdb65f23c,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3880,7 +3881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b1011b80280974e9c981b5d5cc6aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ftprefab: {fileID: 5919113422412206558, guid: c2f12013be432a54e89b95a3fe977d86, type: 3}
+  ftprefab: {fileID: 5919113422412206558, guid: c2f12013be432a54e89b95a3fe977d86,
+    type: 3}
 --- !u!114 &1846702103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5027,7 +5029,8 @@ SpriteRenderer:
   m_SortingLayerID: 2056448005
   m_SortingLayer: 3
   m_SortingOrder: 1
-  m_Sprite: {fileID: 5718469909854450143, guid: 22ab7d759797fee4d997839bdb65f23c, type: 3}
+  m_Sprite: {fileID: 5718469909854450143, guid: 22ab7d759797fee4d997839bdb65f23c,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
