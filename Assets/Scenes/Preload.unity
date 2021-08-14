@@ -287,12 +287,7 @@ MonoBehaviour:
   cam: {fileID: 4937249963537263589}
   ftm: {fileID: 1846702102}
   pointofentry: {x: 0, y: 0}
-  UI: {fileID: 1897843152}
-  BackgroundExit: {fileID: 0}
-  UIContainer: {fileID: 2005685178}
-  Char_Stat: {fileID: 1326687093}
-  Char_Equip: {fileID: 2081004083}
-  Char_Stat2: {fileID: 1930197168}
+  UI: {fileID: 1897843155}
   player: {fileID: 2959147499013075599}
   weapon: {fileID: 1031560565}
   eventsys: {fileID: 657590625}
