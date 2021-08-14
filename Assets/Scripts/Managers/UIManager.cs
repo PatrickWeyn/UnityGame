@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
-{
+public class UIManager : MonoBehaviour {
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.B)){
-            switch (GameManager.app.UI.GetComponent<Animator>().GetBool("isActive")){
-                case true: GameManager.app.UI.GetComponent<Animator>().SetBool("isActive", false);
-                    break;
-                case false: GameManager.app.UI.GetComponent<Animator>().SetBool("isActive", true);
-                    break;
+    private GameObject characterscreen;
+
+    private void Start() {
+        this.characterscreen = gameObject.transform.Find("CharacterScreen").gameObject;
+    }
+
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.B)) {
+            switch (characterscreen.activeSelf) {
+            case true:
+                characterscreen.SetActive(false);
+                break;
+            case false:
+                characterscreen.SetActive(true);
+                break;
             }
         }
     }
@@ -22,7 +28,7 @@ public class UIManager : MonoBehaviour
         GameObject weaponpanel = transform.Find("CharacterScreen").Find("CharacterWeapon").gameObject;
         Weapon weapon = GameManager.app.player.transform.Find("Weapon").GetComponent<Weapon>();
         weaponpanel.transform.Find("MinDmg").GetComponent<Text>().text = weapon.weapon.mindmg.ToString();
-        weaponpanel.transform.Find("MaxDmg").GetComponent<Text>().text = (weapon.weapon.maxdmg-1).ToString();
+        weaponpanel.transform.Find("MaxDmg").GetComponent<Text>().text = (weapon.weapon.maxdmg - 1).ToString();
         weaponpanel.transform.Find("Pushback").GetComponent<Text>().text = weapon.weapon.pushback.ToString();
         weaponpanel.transform.Find("Speed").GetComponent<Text>().text = weapon.weapon.cooldown.ToString();
         weaponpanel.transform.Find("WeaponImage").GetComponent<Image>().sprite = weapon.weapon.art;
