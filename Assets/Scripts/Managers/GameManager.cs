@@ -5,15 +5,19 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
+    //Variables
+    public Vector2 pointofentry;
+    private int gamestate;
+
+    //DDOL
     public static GameManager app;
     public Camera cam;
     public FTManager ftm;
-    public Vector2 pointofentry;
     public UIManager UI;
     public Player player;
     public Weapon weapon;
     public EventSystem eventsys;
-
+    public InputManager im;
 
     public void Awake() {
         if (app != null) {
@@ -27,6 +31,9 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(weapon);
         DontDestroyOnLoad(eventsys);
+        DontDestroyOnLoad(im);
+
+        gamestate = 1;
 
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
         SceneManager.LoadScene("Dungeon_Entrance");
@@ -35,5 +42,19 @@ public class GameManager : MonoBehaviour {
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
         player.transform.position = pointofentry;
         ftm.transform.position = Vector3.zero;
+    }
+
+    public void ToggleCharacterScreen() {
+        if (gamestate == 1) {
+            UI.SetCharacterScreenVisible(true);
+            gamestate = 3;
+        } else if (gamestate == 3) {
+            UI.SetCharacterScreenVisible(false);
+            gamestate = 1;
+        }
+    }
+
+    public int GetGamestate() {
+        return gamestate;
     }
 }

@@ -8,25 +8,16 @@ public class UIManager : MonoBehaviour {
     private GameObject characterscreen;
 
     private void Start() {
-        this.characterscreen = gameObject.transform.Find("CharacterScreen").gameObject;
+        characterscreen = gameObject.transform.Find("CharacterScreen").gameObject;
     }
 
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.B)) {
-            switch (characterscreen.activeSelf) {
-            case true:
-                characterscreen.SetActive(false);
-                break;
-            case false:
-                characterscreen.SetActive(true);
-                break;
-            }
-        }
+    public void SetCharacterScreenVisible(bool visible) {
+        characterscreen.SetActive(visible);
     }
 
     public void UpdateWeapon() {
-        GameObject weaponpanel = transform.Find("CharacterScreen").Find("CharacterWeapon").gameObject;
-        Weapon weapon = GameManager.app.player.transform.Find("Weapon").GetComponent<Weapon>();
+        GameObject weaponpanel = characterscreen.transform.Find("CharacterWeapon").gameObject;
+        Weapon weapon = GameManager.app.weapon.GetComponent<Weapon>();
         weaponpanel.transform.Find("MinDmg").GetComponent<Text>().text = weapon.weapon.mindmg.ToString();
         weaponpanel.transform.Find("MaxDmg").GetComponent<Text>().text = (weapon.weapon.maxdmg - 1).ToString();
         weaponpanel.transform.Find("Pushback").GetComponent<Text>().text = weapon.weapon.pushback.ToString();
@@ -35,7 +26,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public void UpdateAbilityScores() {
-        GameObject abilityscorepanel = transform.Find("CharacterScreen").Find("CharacterAbilityScores").gameObject;
+        GameObject abilityscorepanel = characterscreen.transform.Find("CharacterAbilityScores").gameObject;
         abilityscorepanel.transform.Find("STR").GetComponent<Text>().text = GameManager.app.player.STR.ToString();
         abilityscorepanel.transform.Find("DEX").GetComponent<Text>().text = GameManager.app.player.DEX.ToString();
         abilityscorepanel.transform.Find("CON").GetComponent<Text>().text = GameManager.app.player.CON.ToString();
