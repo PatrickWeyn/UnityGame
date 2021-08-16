@@ -1,0 +1,14 @@
+<!--?xml version=”1.0” encoding=”UTF-8”?-->
+<dialogs>
+	<dialog id= "intro">
+		<Lines>
+			<Line actor="Old Man">Hello!</Line>
+			<Line actor="Womano">Greetings!</Line>
+			<Line actor="Old Man"> Good day to you!</Line>
+		</Lines>
+		<Options>
+			<Option>Hi. Who are you?</Option>
+			<Option>I'm sorry, i was just looking around</Option>
+		</Options>
+	</dialog>
+</dialogs>
