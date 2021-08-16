@@ -2,13 +2,114 @@
 <dialogs>
 	<dialog id= "intro">
 		<Lines>
-			<Line actor="Old Man">Hello!</Line>
-			<Line actor="Womano">Greetings!</Line>
-			<Line actor="Old Man"> Good day to you!</Line>
+			<Line actor="Palace Guard">Lord Nasher Alagondar. Defender of Neverwinter and Reverend Judge Oleff Uskar, Lord Justiciar of Tyr.</Line>
+			<Line actor="Lord Nasher Alagondar">Bring in the accused.</Line>
+			<Line actor="Lord Nasher Alagondar">Reverend Judge, let the trial commence.</Line>
+			<Line actor="Reverend Judge Oleff Uskar">We are gathered here to determine the truth of the crime committed in the small village of Ember... its people slaughtered to the last man, woman, and child.</Line>
+			<Line actor="Reverend Judge Oleff Uskar">Under Tyr's guidance shall the truth of this matter be revealed - and justice delivered. Is the accuser here?</Line>
+			<Line actor="Torio Claven">I speak for those the accused slaughtered at Ember - and i am here to see that justice is carried out this day.</Line>
 		</Lines>
 		<Options>
-			<Option>Hi. Who are you?</Option>
-			<Option>I'm sorry, i was just looking around</Option>
+			<Option destination="todo">As are we all, Ambassador.</Option>
+			<Option destination="introNG">I think the ambassador speaks out of turn. No guilty verdict has been issued.</Option>
+			<Option destination="todo">You don't speak for the dead of Ember, Ambassador, you are the one *responsible*.</Option>
+			<Option destination="todo">I think this Luskan hound has spoken out of turn - she'd best be silent, or i will silence her.</Option>
 		</Options>
+	</dialog>
+	<dialog id= "introNG">
+		<Lines>
+			<Line actor="Torio Claven">The dead of Ember speak strongly enough of your guilt. How can you simply stand there after what you've done...</Line>
+			<Line actor="Reverend Judge Oleff Uskar">The accused is correct, Ambassador - this trial has barely begun.</Line>
+			<Line actor="Torio Claven">Forgive me, Reverend Judge. I am afraid my conviction got the better of me.</Line>
+			<Line actor="Lord Nasher Alagondar">Any more slips of the tongue, Ambassador, and the court will not look favourabl upon it.</Line>
+			<Line actor="Torio Claven">Of course, milord.</Line>
+			<Line actor="Sand">Well done.</Line>
+			<Line actor="Reverend Judge Oleff Uskar">And is the accused here? And his defender?</Line>
+			<Line actor="Sand">We are present, and eager to bring the truth of this matter into Tyr's sight, Reverend Judge.</Line>
+			<Line actor="Reverend Judge Oleff Uskar">Very well. We now list the items presented by the accused in their defense, and they will be shown to the people of the court, Lord Nasher, and held aloft for the eye of Tyr to see. First off...</Line>
+			<Line actor="Sand">It may take a while for them to get through all the evidence, bless it, and the rest of the ritual nonsense, so if you have anything you want to ask, now's the best time.</Line>
+		</Lines>
+		<Options>
+			<Option destination="todo">I still don't understand how i was ill-fated enough to have you represent me.</Option>
+			<Option destination="sandadvice">Do you have any advice?</Option>
+			<Option destination="todo">What if i want to skip this trial?</Option>
+			<Option destination="todo">As soon as the evidence is presented, let's be done with this.</Option>
+			<Option destination="todo">I have no patience for this. How can we speed things up?</Option>
+			<Option destination="todo">Let's just hear the evidence out.</Option>
+		</Options>
+	</dialog>
+	<dialog id= "sandadvice">
+		<Lines>
+			<Line actor="Sand">Torio is an arrogant creature, but she is not a Luskan Ambassador for nothing. This court is her theater, her arena, and she has had years of experience in treachery and twisting words.</Line>
+			<Line actor="Sand">While evidence helps a case, she knows it is often the drama, the belief of everyone here as to who is guilty and who is not that will ultimately win the day.</Line>
+			<Line actor="Sand">Do not forget, that the rabble are here today to see someone *hang* - unless you can convince them you have been wronged, and grievously so, it is an uphill battle you fight.</Line>
+		</Lines>
+		<Options>
+			<Option destination="sandstrategy">So what strategy would you suggest?</Option>
+			<Link destination="introNG" removeoption="sandadvice"></Link>
+		</Options>
+	</dialog>
+	<dialog id= "sandstrategy">
+		<Lines>
+			<Line actor="Sand">It is somewhat...unorthodox, but playing uppon the animosity between Luskan and Neverwinter may help you...</Line>
+		</Lines>
+		<Options>
+			<Option destination="todo">I want to win by the rules of the court, not because of Luskan prejudice?</Option>
+			<Option destination="sandstrategy2">But? You don't sound convinced.</Option>
+			<Option destination="todo">Unorthodox suits me fine - and Luskan's been quick to use it when they can, anyway.</Option>
+		</Options>
+	</dialog>
+	<dialog id= "sandstrategy2">
+		<Lines>
+			<Line actor="Sand">...but that will only go so far, and may even help Torio in convincing the court that your actions may have been an attempt to start another war, which no one in Neverwinter wants.</Line>
+			<Line actor="Sand">I cannot give you a clear strategy, but remember that trading diplomatic words with Torio will be difficult - do *not* resort to such a duel unless you feel you can absolutely win.</Line>
+			<Line actor="Sand">And do not threaten her or try to bluff her unless you are equally certain - if you fail, you are bound for the gallows for certain.</Line>
+		</Lines>
+		<Options>
+			<Option destination="sandnegative">Your advice is useless, forget i asked.</Option>
+			<Option destination="sandpositive">I'll heed your advice.</Option>
+			<Option destination="todo">Then I am ready to face this. Shall we?</Option>
+			<Option destination="todo">Forget it. The sooner we start this circus, the sooner it'll be over.</Option>
+			<Option destination="todo">Let's just hear the evidence out.</Option>
+		</Options>
+	</dialog>
+	<dialog id= "sandpositive">
+		<Lines>
+			<Line actor="Sand" influence=1>Well, i'm glad someone does. I *occasionally* have a good idea, you know.</Line>
+		</Lines>
+		<Options>
+			<Option destination="sandthanks">And Sand - thanks for representing me.</Option>
+			<Option destination="todo">If you let me down now, Sand, remember it's not just *my* life that's at risk. If i go to the gallows, I'll say you were at Ember with me. Got it?</Option>
+			<Link destination="sandstrategy2" removeoption="sandnegative, sandpositive"></Link>
+		</Options>
+	</dialog>
+	<dialog id= "sandthanks">
+		<Lines>
+			<Line actor="Sand" influence=1>Oh. Well, you're welcome.</Line>
+			<Line actor="Sand">But really, no thanks needed. I assure you, this is a labor of love, and i relish the thought of seeing Luskan lose face - and possibly Torio losing her head.</Line>
+			<Line actor="Sand">Come, let us deliver some humiliations, one arrow at a time - it looks like they have finished dispensing the evidence.</Line>
+			<Line actor="Reverend Judge Oleff Uskar">...and that is the evidence before us.</Line>
+			<Line actor="Sand">Ah, that went over well. I think we've done some damage to their case... *and* put a nice little twist of the dagger in Torio's side.</Line>
+			<Line actor="Reverend Judge Oleff Uskar">The accuser, Ambassador Torio Claven of Luskan, may now call witnesses to the stand.</Line>
+			<Line actor="Torio Claven">I think we have seen enough of these objects and speculation - let us hear from those who witnessed the truth.</Line>
+		</Lines>
+		<Options>
+			<Option destination="todo" require="Charisma:5">Forgive me, Ambassador, but are you speculating on the truth of the evidence?</Option>
+			<Option destination="todo" require="Charisma:5">Why do you want to distract us from the evidence? Scared of what it means, Luskan?</Option>
+			<Option destination="todo">Are you saying this evidence is questionable?</Option>
+			<Option destination="todo">Let her bring her witnesses in - I look forward to it.</Option>
+			<Link destination="skip"></Link>
+		</Options>
+	</dialog>
+	<dialog id= "skip">
+		<Options>
+			<Option destination="todo">You handle her from here, Sand. I don't want to cross-examine the witnesses.</Option>
+			<Option destination="todo">I won't put myself on trial to any dog of Luskan. I say settle the verdict now!</Option>
+		</Options>
+	</dialog>
+	<dialog id= "todo">
+		<Lines>
+			<Line actor="developer">This dialog has not been added yet. Unfortunate.</Line>
+		</Lines>
 	</dialog>
 </dialogs>

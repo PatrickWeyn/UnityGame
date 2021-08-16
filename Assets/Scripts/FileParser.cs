@@ -4,7 +4,7 @@ using System.IO;
 using System.Xml;
 using UnityEngine;
 
-public class FileParser : MonoBehaviour {
+public class FileParser {
     private static string path = "Assets/Resources/Dialogs/";
 
     public List<Dialog> ParseDialog(string filename) {
@@ -19,7 +19,7 @@ public class FileParser : MonoBehaviour {
             string id = node.GetAttribute("id");
             string[,] lines = new string[node.SelectNodes("Lines/Line").Count,2];
             foreach(XmlElement line in node.SelectNodes("Lines/Line")) {
-                Debug.Log(line.GetAttribute("actor"));
+                Debug.Log(line.GetAttribute("actor") + ": " + line.InnerText);
             }
         }
 

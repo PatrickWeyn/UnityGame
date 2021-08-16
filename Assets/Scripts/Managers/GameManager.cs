@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -16,7 +14,10 @@ public class GameManager : MonoBehaviour {
     public UIManager UI;
     public Player player;
     public EventSystem eventsys;
-    public InputManager im;
+
+    //Objects only to be interacted with by the GameManager
+    private InputManager im;
+    private FileParser fp;
 
     public void Awake() {
         if (app != null) {
@@ -29,12 +30,14 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(UI);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(eventsys);
-        DontDestroyOnLoad(im);
+        im = GameManager.app.gameObject.AddComponent<InputManager>();
+        fp = new FileParser();
 
         gamestate = 1;
 
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
         SceneManager.LoadScene("Dungeon_Entrance");
+        fp.ParseDialog("oldman.xml");
     }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
