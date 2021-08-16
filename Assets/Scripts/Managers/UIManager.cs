@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour {
     private GameObject characterscreen;
 
     private void Start() {
-        characterscreen = gameObject.transform.Find("CharacterScreen").gameObject;
+        characterscreen = transform.Find("CharacterScreen").gameObject;
     }
 
     public void SetCharacterScreenVisible(bool visible) {

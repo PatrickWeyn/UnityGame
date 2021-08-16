@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour {
     public FTManager ftm;
     public UIManager UI;
     public Player player;
-    public Weapon weapon;
     public EventSystem eventsys;
     public InputManager im;
 
@@ -29,7 +28,6 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(ftm);
         DontDestroyOnLoad(UI);
         DontDestroyOnLoad(player);
-        DontDestroyOnLoad(weapon);
         DontDestroyOnLoad(eventsys);
         DontDestroyOnLoad(im);
 
@@ -46,6 +44,9 @@ public class GameManager : MonoBehaviour {
 
     public void ToggleCharacterScreen() {
         if (gamestate == 1) {
+            UI.UpdateWeapon();
+            UI.UpdateStats();
+            UI.UpdateAbilityScores();
             UI.SetCharacterScreenVisible(true);
             gamestate = 3;
         } else if (gamestate == 3) {
