@@ -75,7 +75,7 @@
 	</dialog>
 	<dialog id= "sandpositive">
 		<Lines>
-			<Line actor="Sand" influence=1>Well, i'm glad someone does. I *occasionally* have a good idea, you know.</Line>
+			<Line actor="Sand" influence="1">Well, i'm glad someone does. I *occasionally* have a good idea, you know.</Line>
 		</Lines>
 		<Options>
 			<Option destination="sandthanks">And Sand - thanks for representing me.</Option>
@@ -85,7 +85,7 @@
 	</dialog>
 	<dialog id= "sandthanks">
 		<Lines>
-			<Line actor="Sand" influence=1>Oh. Well, you're welcome.</Line>
+			<Line actor="Sand" influence="1">Oh. Well, you're welcome.</Line>
 			<Line actor="Sand">But really, no thanks needed. I assure you, this is a labor of love, and i relish the thought of seeing Luskan lose face - and possibly Torio losing her head.</Line>
 			<Line actor="Sand">Come, let us deliver some humiliations, one arrow at a time - it looks like they have finished dispensing the evidence.</Line>
 			<Line actor="Reverend Judge Oleff Uskar">...and that is the evidence before us.</Line>
