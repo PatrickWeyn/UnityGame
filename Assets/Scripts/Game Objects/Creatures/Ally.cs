@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ally : NPC {
     //Variables
-    private const float DETECTIONRANGE = 2.0f;
+    private const float DETECTIONRANGE = 0.32f;
 
     private bool inrange;
 
