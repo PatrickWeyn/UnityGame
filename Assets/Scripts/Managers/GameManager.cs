@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour {
     //Objects only to be interacted with by the GameManager
     private InputManager im;
     private FileParser fp;
+    private List<Ally> alliesinrange;
+    private Ally conversationpartner;
 
     public void Awake() {
         if (app != null) {
@@ -32,6 +35,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(eventsys);
         im = GameManager.app.gameObject.AddComponent<InputManager>();
         fp = new FileParser();
+        alliesinrange = new List<Ally>();
 
         gamestate = 1;
 
@@ -60,5 +64,21 @@ public class GameManager : MonoBehaviour {
 
     public int GetGamestate() {
         return gamestate;
+    }
+
+    public void AddAlly(Ally ally) {
+        if (alliesinrange.Count == 0) {
+            conversationpartner = ally;
+        }
+        alliesinrange.Add(ally);
+        Debug.Log("Player entered within range of " + ally.name + ".");
+    }
+
+    public void RemoveAlly(Ally ally) {
+        alliesinrange.Remove(ally);
+        if (alliesinrange.Count == 0) {
+            conversationpartner = null;
+        }
+        Debug.Log("Player left range of " + ally.name + ".");
     }
 }
