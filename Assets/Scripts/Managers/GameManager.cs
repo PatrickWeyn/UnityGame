@@ -38,10 +38,11 @@ public class GameManager : MonoBehaviour {
         alliesinrange = new List<Ally>();
 
         gamestate = 1;
+        fp.InitializeParser("oldman.xml");
+        fp.GetDialog("intro");
 
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
         SceneManager.LoadScene("Dungeon_Entrance");
-        fp.ParseDialog("oldman.xml");
     }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {

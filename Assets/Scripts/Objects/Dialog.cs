@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Dialog {
     public string ID;
+    public string[,] lines;
 
 }
