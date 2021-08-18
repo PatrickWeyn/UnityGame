@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour {
 
     public void UpdateWeapon() {
         GameObject weaponpanel = characterscreen.transform.Find("CharacterWeapon").gameObject;
-        Weapon weapon = GameManager.app.weapon.GetComponent<Weapon>();
+        Weapon weapon = GameManager.app.player.GetWeapon();
         weaponpanel.transform.Find("MinDmg").GetComponent<Text>().text = weapon.weapon.mindmg.ToString();
         weaponpanel.transform.Find("MaxDmg").GetComponent<Text>().text = (weapon.weapon.maxdmg - 1).ToString();
         weaponpanel.transform.Find("Pushback").GetComponent<Text>().text = weapon.weapon.pushback.ToString();

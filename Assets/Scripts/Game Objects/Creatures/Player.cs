@@ -7,6 +7,7 @@ public class Player : Creature {
 
     private int experience;
     public int unusedabilitypoints;
+    private Weapon weapon;
 
     private void Start() {
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -19,6 +20,7 @@ public class Player : Creature {
         WIS = 1;
         CHA = 1;
         unusedabilitypoints = 5;
+        weapon = gameObject.transform.GetComponentInChildren<Weapon>();
         GameManager.app.UI.SendMessage("UpdateAbilityScores");
         GameManager.app.UI.SendMessage("UpdateStats");
     }
@@ -36,8 +38,7 @@ public class Player : Creature {
         //Swap sprite direction based on mouse position
         if ((Input.mousePosition.x - Screen.width / 2) < 0) {
             transform.localScale = new Vector3(-1, 1, 0);
-        }
-        else {
+        } else {
             transform.localScale = new Vector3(1, 1, 0);
         }
     }
@@ -54,15 +55,18 @@ public class Player : Creature {
         if (unusedabilitypoints > 0) {
             unusedabilitypoints -= 1;
             switch (ability) {
-                case "STR": STR += 1; break;
-                case "DEX": DEX += 1; break;
-                case "CON": CON += 1; break;
-                case "INT": INT += 1; break;
-                case "WIS": WIS += 1; break;
-                case "CHA": CHA += 1; break;
+            case "STR": STR += 1; break;
+            case "DEX": DEX += 1; break;
+            case "CON": CON += 1; break;
+            case "INT": INT += 1; break;
+            case "WIS": WIS += 1; break;
+            case "CHA": CHA += 1; break;
             }
             GameManager.app.UI.SendMessage("UpdateAbilityScores");
         }
     }
 
+    public Weapon GetWeapon() {
+        return weapon;
+    }
 }
