@@ -36,6 +36,17 @@ public class FileParser {
             d.lines[counter, 1] = line.InnerText;
             Debug.Log("LINE - spoken by " + d.lines[counter, 0]);
             Debug.Log("CONTENT: \"" + d.lines[counter, 1] + "\"");
+            counter++;
         }
+        counter = 0;
+        d.options = new string[node.SelectNodes("Options/Option").Count, 2];
+        foreach (XmlElement option in node.SelectNodes("Options/Option")) {
+            d.options[counter, 0] = option.GetAttribute("destination");
+            d.options[counter, 1] = option.InnerText;
+            Debug.Log("OPTION - destined towards " + d.options[counter, 0]);
+            Debug.Log("CONTENT: \"" + d.options[counter, 1] + "\"");
+            counter++;
+        }
+
     }
 }
