@@ -50,18 +50,29 @@ public class GameManager : MonoBehaviour {
         ftm.transform.position = Vector3.zero;
     }
 
-    public void ToggleCharacterScreen() {
-        if (gamestate == 1) {
-            UI.UpdateWeapon();
-            UI.UpdateStats();
-            UI.UpdateAbilityScores();
-            UI.SetCharacterScreenVisible(true);
-            gamestate = 3;
-        } else if (gamestate == 3) {
-            UI.SetCharacterScreenVisible(false);
-            gamestate = 1;
-        }
+    public void ShowCharacterScreen() {
+        UI.UpdateWeapon();
+        UI.UpdateStats();
+        UI.UpdateAbilityScores();
+        UI.SetCharacterScreenVisible(true);
+        gamestate = 3;
+
     }
+
+    public void HideCharacterScreen() {
+        UI.SetCharacterScreenVisible(false);
+        gamestate = 1;
+    }
+
+    public void ShowDialogScreen() {
+        UI.SetDialogScreenVisible(true);
+        gamestate = 2;
+    }
+
+    public void HideDialogScreen() {
+        UI.SetDialogScreenVisible(false);
+        gamestate = 1;
+}
 
     public int GetGamestate() {
         return gamestate;

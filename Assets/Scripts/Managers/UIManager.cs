@@ -6,13 +6,21 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 
     private GameObject characterscreen;
+    private GameObject dialogscreen;
+    private GameObject responsescreen;
 
     private void Start() {
         characterscreen = transform.Find("CharacterScreen").gameObject;
+        dialogscreen = transform.Find("DialogueBox").gameObject;
+        responsescreen = dialogscreen.transform.Find("PAN_Responses").transform.Find("Viewport").transform.Find("Content").gameObject;
     }
 
     public void SetCharacterScreenVisible(bool visible) {
         characterscreen.SetActive(visible);
+    }
+
+    public void SetDialogScreenVisible(bool visible) {
+        dialogscreen.SetActive(visible);
     }
 
     public void UpdateWeapon() {
